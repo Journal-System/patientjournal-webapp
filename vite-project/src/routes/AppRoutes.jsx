@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Patients } from "../pages/PatientCatalog/PatientCatalogView";
+import { Home } from "../pages/Home/HomeView";
 
 export default function AppRoutes() {
   return (
     <HelmetProvider>
       <Routes>
-        {/* <Route
+        <Route
           path="/"
           element={
             <>
@@ -16,7 +17,7 @@ export default function AppRoutes() {
               <Home />
             </>
           }
-        /> */}
+        />
 
         <Route
           path="/Patients"

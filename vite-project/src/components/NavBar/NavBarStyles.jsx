@@ -15,6 +15,17 @@ export const NavItems = styled("div")`
   justify-content: space-between;
 `;
 
+export const LogoText = styled("div")`
+  font-size: 1.5rem; // Example font size
+  color: #333; // Example text color
+  font-weight: 600; // Example font weight
+  display: flex; // Use flex to center the content
+  align-items: center; // Center vertically
+  justify-content: center; // Center horizontally
+  margin: 0 20px; // Add some margin on the sides
+  white-space: nowrap; // Prevent the text from wrapping
+`;
+
 const Button = styled(MuiButton)`
   color: #ffffff;
   margin-left: 10px;

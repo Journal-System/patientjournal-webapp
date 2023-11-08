@@ -1,6 +1,12 @@
 import React from "react";
 import patientLogo from "../../assets/patientlogo.png";
-import { NavbarContainer, NavItems, TertiaryButton } from "./NavBarStyles";
+import {
+  NavbarContainer,
+  NavItems,
+  TertiaryButton,
+  LogoText,
+  SecondaryButton
+} from "./NavBarStyles";
 
 export default function Navbar() {
   return (
@@ -13,9 +19,10 @@ export default function Navbar() {
             style={{ height: "60px" }}
           />
         </div>
+        <LogoText>Patient Journal</LogoText>
         <div>
-          <TertiaryButton variant="contained">Log In</TertiaryButton>
-          <TertiaryButton variant="contained">Register</TertiaryButton>
+          <SecondaryButton variant="contained">Log In</SecondaryButton>
+          <SecondaryButton variant="contained">Register</SecondaryButton>
         </div>
       </NavItems>
     </NavbarContainer>

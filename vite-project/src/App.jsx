@@ -15,7 +15,7 @@ export default function App() {
           <div className="main">
             <AppRoutes />
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </QueryClientProvider>
     </>
