@@ -3,7 +3,14 @@ import { FooterContainer } from "./FooterStyles";
 export default function Footer() {
   return (
     <FooterContainer>
-      <h3>Hello World</h3>
+      <div>
+        <a href="" style={{ color: "#000000", margin: "5px" }}>
+          Suggestions -
+        </a>
+        <a href="" style={{ color: "#000000" }}>
+          Contact
+        </a>
+      </div>
     </FooterContainer>
   );
 }

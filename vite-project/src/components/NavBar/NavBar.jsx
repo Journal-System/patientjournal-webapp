@@ -1,7 +1,6 @@
 import React from "react";
 import patientLogo from "../../assets/patientlogo.png";
-import { NavbarContainer, PrimaryButton, NavItems } from "./NavbarStyles";
-import { margin } from "@mui/system";
+import { NavbarContainer, NavItems, TertiaryButton } from "./NavBarStyles";
 
 export default function Navbar() {
   return (
@@ -15,8 +14,8 @@ export default function Navbar() {
           />
         </div>
         <div>
-          <PrimaryButton variant="contained">Log In</PrimaryButton>
-          <PrimaryButton variant="contained">Register</PrimaryButton>
+          <TertiaryButton variant="contained">Log In</TertiaryButton>
+          <TertiaryButton variant="contained">Register</TertiaryButton>
         </div>
       </NavItems>
     </NavbarContainer>

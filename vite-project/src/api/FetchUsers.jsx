@@ -19,3 +19,23 @@ export async function getUser(id) {
         }
     }
 }
+
+export async function getAllUsers() {
+    try {
+        const options = {
+            method: "GET",
+            url: `http://localhost:8080/user/getAllUsers`,
+        }; 
+
+        const response = await axios.request(options);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            console.log("Could not find any user");
+            throw new Error("Could not find any user")
+        } else {
+            console.error(error.toJSON ? error.toJSON() : error);
+        }
+    }
+}
