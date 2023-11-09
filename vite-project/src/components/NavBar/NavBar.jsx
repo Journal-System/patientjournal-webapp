@@ -1,12 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import patientLogo from "../../assets/patientlogo.png";
 import {
   NavbarContainer,
   NavItems,
-  TertiaryButton,
   LogoText,
-  SecondaryButton
-} from "./NavBarStyles";
+  StyledLink,
+} from "./NavbarStyles";
 
 export default function Navbar() {
   return (
@@ -21,8 +21,12 @@ export default function Navbar() {
         </div>
         <LogoText>Patient Journal</LogoText>
         <div>
-          <SecondaryButton variant="contained">Log In</SecondaryButton>
-          <SecondaryButton variant="contained">Register</SecondaryButton>
+          <StyledLink variant="contained" component={Link} to="/Login">
+            Log In
+          </StyledLink>
+          <StyledLink variant="contained" component={Link} to="/Register">
+            Register
+          </StyledLink>
         </div>
       </NavItems>
     </NavbarContainer>

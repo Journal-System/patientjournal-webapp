@@ -82,7 +82,6 @@ export function Patients() {
                           <Typography variant="body1">Phone: {item.phone}</Typography>
                           <Typography variant="body1">Email: {item.email}</Typography>
                           <Typography variant="body1">Address: {item.address}</Typography>
-                          {/* Lägg till mer detaljerad information här om nödvändigt */}
                         </div>
                       </TableCell>
                     </TableRow>
@@ -92,7 +91,7 @@ export function Patients() {
             ) : (
               <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
-                  Inga matchande poster hittades
+                  Inga patienter hittades
                 </TableCell>
               </TableRow>
             )}

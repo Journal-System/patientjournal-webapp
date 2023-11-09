@@ -1,8 +1,8 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AppRoutes from "./routes/AppRoutes";
-import Footer from "./components/Footer/Footer";
-import NavBar from "./components/NavBar/NavBar";
+import Navbar from './components/Navbar/Navbar';
+
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -11,11 +11,10 @@ export default function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <div className="page-wrapper">
-          <NavBar />
+          <Navbar />
           <div className="main">
             <AppRoutes />
           </div>
-          {/* <Footer /> */}
         </div>
       </QueryClientProvider>
     </>

@@ -29,10 +29,9 @@ export function Home() {
       <HomeContainerWrapper>
         <video
           style={videoStyle}
-          autoPlay // This will play the video as soon as it's loaded
-          loop // This will loop the video indefinitely
-          muted // This will mute the video; necessary for autoplay in most browsers
-          playsInline // This can provide a better experience on mobile devices
+          autoPlay
+          loop 
+          muted 
         >
           <source src={patientVideo} type="video/mp4" />
           Your browser does not support the video tag.

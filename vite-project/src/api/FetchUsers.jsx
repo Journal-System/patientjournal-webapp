@@ -39,3 +39,17 @@ export async function getAllUsers() {
         }
     }
 }
+
+export async function postUser(newUser) {
+    fetch('http://localhost:8080/user/add', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser),
+    })
+    .then(response => response.JSON())
+    .then(response => console.log(JSON.stringify(response)))
+  }
+  

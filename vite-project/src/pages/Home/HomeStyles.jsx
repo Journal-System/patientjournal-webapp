@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 export const HomeContainer = styled("div")`
   grid-area: main;
   width: 100vw;
-  padding: 65px 60px 20px 60px; /* top right down left*/
+  padding: 15px 60px 20px 60px; /* top right down left*/
   background-color: #f8f9fa;
   color: #000000;
   text-align: center;
@@ -34,7 +34,7 @@ export const HeadingStyle = styled(Typography)`
 
 export const DescriptionStyle = styled("p")`
   color: #555;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.6;
   text-align: left; /* Align the text to the left */
