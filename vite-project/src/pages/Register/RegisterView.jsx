@@ -6,51 +6,50 @@ import {
   LoginContainer,
   LoginContainerWrapper,
   FormTitle,
-  FormFooter,
-  InfoText,
+  ErrorText,
+  SuccessText
 } from "./RegisterStyles";
 import { postUser } from "../../api/FetchUsers";
 
 export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [fname, setFirstName] = useState("");
+  const [lname, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newUser = {
-      firstname: firstname,
-      lastname: lastname,
-      phone: phone,
-      address: address,
-      email: email,
-      password: password,
+      fname, lname, phone,
+      address, email, password
     };
 
-    console.log("Firstname: " + firstname);
-    console.log("Lastname: " + lastname);
-    console.log("Phone: " + phone);
-    console.log("Address: " + address);
-    console.log("Email: " + email);
-    console.log("Password: " + password);
+    postUser(newUser, 
+      () => {
+        setSuccessMessage("Account created successfully! Redirecting...");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      },
+      (error) => {
+        setError(error.message); // Set the error state
+      }
+    );
+  };
 
-    postUser(newUser)
-      .then(() => {
-        // Handle success, maybe clear form or show a success message
-        console.log("User registered successfully");
-      })
-      .catch((error) => {
-        // Handle errors, maybe show an error message
-        console.error("Failed to register user:", error);
-      });
+  const handleInputChange = (setter) => (event) => {
+    if (error) {
+      setError(""); // Clear the error when the user starts typing
+    }
+    setter(event.target.value); // Use the setter for the specific state
   };
 
   return (
     <LoginContainer>
-      <InfoText>Another text</InfoText>
       <LoginContainerWrapper>
         <StyledForm onSubmit={handleSubmit}>
           <FormTitle>Create your Account</FormTitle>
@@ -59,49 +58,57 @@ export function Register() {
             type="firstname"
             variant="outlined"
             fullWidth
-            value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
+            required
+            value={fname}
+            onChange={handleInputChange(setFirstName)}
           />
           <StyledInput
             label="Last name"
             type="lastname"
             variant="outlined"
             fullWidth
-            value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
+            required
+            value={lname}
+            onChange={handleInputChange(setLastName)}
           />
           <StyledInput
             label="Phone"
             type="phone"
             variant="outlined"
             fullWidth
+            required
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={handleInputChange(setPhone)}
           />
           <StyledInput
             label="Address"
             type="address"
             variant="outlined"
             fullWidth
+            required
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={handleInputChange(setAddress)}
           />
           <StyledInput
             label="Email"
             type="email"
             variant="outlined"
             fullWidth
+            required
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleInputChange(setEmail)}
           />
           <StyledInput
             label="Password"
             type="password"
             variant="outlined"
             fullWidth
+            required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleInputChange(setPassword)}
           />
+          {error && <ErrorText>{error}</ErrorText>}
+          {successMessage && <SuccessText>{successMessage}</SuccessText>}
           <StyledButton type="submit" fullWidth>
             Register
           </StyledButton>

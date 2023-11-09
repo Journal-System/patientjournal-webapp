@@ -4,7 +4,7 @@ import { Box, Typography, TextField, Button } from "@mui/material";
 export const LoginContainer = styled("div")`
   grid-area: main;
   width: 100vw;
-  padding: 65px 60px 20px 60px; /* top right down left */
+  padding: 80px 60px 50px 60px; /* top right down left */
   background-color: #f8f9fa;
   color: #000000;
   justify-content: center;
@@ -21,18 +21,18 @@ export const LoginContainerWrapper = styled(Box)`
   padding: 2rem;
   background-color: #ffffff;
   width: 100%;
-  height: 400px;
+  height: 600px;
   max-width: 600px;
 `;
 
 export const StyledForm = styled("form")`
-  padding-top: 30px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
 `;
 
 export const FormTitle = styled(Typography)`
-padding-bottom: 30px;
+padding-bottom: 20px;
   variant: 'h5',
   component: 'h2',
   margin-bottom: 1rem;
@@ -55,6 +55,14 @@ export const StyledInput = styled(TextField)`
       bordercolor: #007bff;
     }
   }
+
+  .MuiInputLabel-outlined.MuiInputLabel-marginDense {
+    transform: translate(14px, 20px) scale(1); // Adjust label positioning and scale as needed
+  }
+
+  .MuiInputLabel-outlined.MuiInputLabel-shrink {
+    transform: translate(14px, -4.5px) scale(0.75); // Adjust label positioning and scale when shrunk
+  }
 `;
 
 export const StyledButton = styled(Button)`
@@ -71,20 +79,12 @@ export const StyledButton = styled(Button)`
   }
 `;
 
-export const FormFooter = styled("p")`
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  a {
-    color: #007bff;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+export const ErrorText = styled(Typography)`
+  color: red;
+  font-size: 0.9rem;
 `;
 
-export const InfoText = styled(Typography)`
-  padding: 40px;
-  color: rgba(0, 0, 0, 0.54);
-  font-size: 1.4rem; 
+export const SuccessText = styled(Typography)`
+  color: green;
+  font-size: 0.9rem;
 `;

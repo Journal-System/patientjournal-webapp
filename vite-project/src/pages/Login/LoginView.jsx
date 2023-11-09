@@ -18,6 +18,7 @@ export function Login() {
     event.preventDefault();
     // Handle the login logic here
     console.log("Login with:", email, password);
+    
   };
 
   return (
