@@ -14,8 +14,8 @@ import { postUser } from "../../api/FetchUsers";
 export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fname, setFirstName] = useState("");
-  const [lname, setLastName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
@@ -24,7 +24,7 @@ export function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newUser = {
-      fname, lname, phone,
+      firstname, lastname, phone,
       address, email, password
     };
 
@@ -59,7 +59,7 @@ export function Register() {
             variant="outlined"
             fullWidth
             required
-            value={fname}
+            value={firstname}
             onChange={handleInputChange(setFirstName)}
           />
           <StyledInput
@@ -68,7 +68,7 @@ export function Register() {
             variant="outlined"
             fullWidth
             required
-            value={lname}
+            value={lastname}
             onChange={handleInputChange(setLastName)}
           />
           <StyledInput
