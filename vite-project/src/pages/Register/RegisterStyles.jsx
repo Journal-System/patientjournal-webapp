@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 import { Box, Typography, TextField, Button } from "@mui/material";
 
-export const LoginContainer = styled("div")`
+export const RegisterContainer = styled("div")`
   grid-area: main;
   width: 100vw;
   padding: 80px 60px 50px 60px; /* top right down left */
@@ -13,7 +13,7 @@ export const LoginContainer = styled("div")`
   height: 100%;
 `;
 
-export const LoginContainerWrapper = styled(Box)`
+export const RegisterContainerWrapper = styled(Box)`
   border: 2px solid #e0e0e0;
   margin: auto;
   border-radius: 8px;

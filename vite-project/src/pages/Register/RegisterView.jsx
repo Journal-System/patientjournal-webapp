@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyledForm,
   StyledInput,
   StyledButton,
-  LoginContainer,
-  LoginContainerWrapper,
+  RegisterContainer,
+  RegisterContainerWrapper,
   FormTitle,
   ErrorText,
   SuccessText
@@ -20,6 +20,7 @@ export function Register() {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,21 +37,40 @@ export function Register() {
         }, 2000);
       },
       (error) => {
-        setError(error.message); // Set the error state
+        setError(error.message); 
       }
     );
   };
 
   const handleInputChange = (setter) => (event) => {
     if (error) {
-      setError(""); // Clear the error when the user starts typing
+      setError(""); 
     }
-    setter(event.target.value); // Use the setter for the specific state
+    setter(event.target.value); 
   };
 
+  useEffect(() => {
+    const userEmail = localStorage.getItem("userEmail");
+    if (userEmail) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  if (isLoggedIn) {
+    return (
+      <RegisterContainer>
+        <div
+          style={{ fontSize: "100px", textAlign: "center", marginTop: "200px" }}
+        >
+          You are already logged in. Please go to your <a href="/">dashboard</a>{" "}
+          to access your account.
+        </div>
+      </RegisterContainer>
+    )
+  }
   return (
-    <LoginContainer>
-      <LoginContainerWrapper>
+    <RegisterContainer>
+      <RegisterContainerWrapper>
         <StyledForm onSubmit={handleSubmit}>
           <FormTitle>Create your Account</FormTitle>
           <StyledInput
@@ -113,7 +133,7 @@ export function Register() {
             Register
           </StyledButton>
         </StyledForm>
-      </LoginContainerWrapper>
-    </LoginContainer>
+      </RegisterContainerWrapper>
+    </RegisterContainer>
   );
 }

@@ -1,30 +1,10 @@
 import axios from "axios";
 
-export async function getUser(id) {
-  try {
-    const options = {
-      method: "GET",
-      url: `http://localhost:8080/user/get/${id}`,
-    };
-
-    const response = await axios.request(options);
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    if (error.response && error.response.status === 404) {
-      console.log("Could not find this user");
-      throw new Error("Could not find this user");
-    } else {
-      console.error(error.toJSON ? error.toJSON() : error);
-    }
-  }
-}
-
 export async function getAllUsers() {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/user/getAllUsers`,
+      url: `http://localhost:8080/patient/getAllPatients`,
     };
 
     const response = await axios.request(options);
@@ -41,7 +21,7 @@ export async function getAllUsers() {
 }
 
 export function postUser(newUser, onSuccess, onError) {
-    fetch("http://localhost:8080/user/add", {
+    fetch("http://localhost:8080/patient/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),
@@ -64,5 +44,23 @@ export function postUser(newUser, onSuccess, onError) {
     });
   }
 
-  
-  
+export function authenticate(email, password) {
+  // Construct the query parameters
+  const queryParams = new URLSearchParams({ email, password });
+
+  return fetch(`http://localhost:8080/authentication/login?${queryParams.toString()}`, {
+    method: "POST",
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json(); // or response.text() if the response is not in JSON format
+    } else if (response.status === 401) {
+      throw new Error('Unauthorized');
+    } else {
+      throw new Error('An error occurred');
+    }
+  })
+  .catch(error => {
+    throw error;
+  });
+}

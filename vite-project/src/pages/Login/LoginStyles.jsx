@@ -32,7 +32,7 @@ export const StyledForm = styled("form")`
 `;
 
 export const FormTitle = styled(Typography)`
-padding-bottom: 30px;
+padding-bottom: 5px;
   variant: 'h5',
   component: 'h2',
   margin-bottom: 1rem;
@@ -86,5 +86,10 @@ export const FormFooter = styled("p")`
 export const InfoText = styled(Typography)`
   padding: 40px;
   color: rgba(0, 0, 0, 0.54);
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
+`;
+
+export const SuccessText = styled(Typography)`
+  color: green;
+  font-size: 0.9rem;
 `;
