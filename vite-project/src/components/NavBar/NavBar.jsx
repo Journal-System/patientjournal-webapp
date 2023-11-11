@@ -6,9 +6,9 @@ import {
   NavItems,
   LogoText,
   StyledLink,
-} from "./NavbarStyles";
+} from "./NavBarStyles";
 
-export default function Navbar() {
+export default function NavBar() {
   const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("userRole");
     setUserEmail("");
     window.location.href = "/Login";
   };

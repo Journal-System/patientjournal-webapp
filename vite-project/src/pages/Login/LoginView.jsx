@@ -27,6 +27,7 @@ export function Login() {
       .then((data) => {
         console.log("Login successful with data:", data);
         localStorage.setItem("userEmail", email);
+        localStorage.setItem("userRole", data.userRole);
         setSuccessMessage("Login successful! Redirecting...");
         setTimeout(() => {
           window.location.href = "/";

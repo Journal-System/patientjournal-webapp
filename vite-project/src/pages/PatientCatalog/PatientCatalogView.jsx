@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import {
   ContainerWrapper,
@@ -14,6 +14,7 @@ import { usePatientLogic } from "./PatientLogic";
 export function Patients() {
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedRow, setExpandedRow] = useState(null);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toUpperCase());
@@ -23,17 +24,21 @@ export function Patients() {
     setExpandedRow(expandedRow === index ? null : index);
   };
 
-  const {
-    isLoading,
-    usersData,
-    isError,
-    error,
-  } = usePatientLogic();
+  const { isLoading, usersData, isError, error } = usePatientLogic();
+
+  useEffect(() => {
+    const userRole = localStorage.getItem("userRole");
+    if (userRole === "DOCTOR") {
+      console.log("NIGGA");
+      setIsAuthorized(true);
+    }
+  }, []);
 
   // Ensure 'usersData' is not undefined before filtering
-  const filteredData = usersData?.filter((item) =>
-    item.fullname.toUpperCase().includes(searchTerm)
-  ) || [];
+  const filteredData =
+    usersData?.filter((item) =>
+      item.fullname.toUpperCase().includes(searchTerm)
+    ) || [];
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -41,6 +46,20 @@ export function Patients() {
 
   if (isError) {
     return <div>Error: {error.message}</div>;
+  }
+
+  if (!isAuthorized) {
+    return (
+      <PatientsContainer>
+        <div
+          style={{ fontSize: "90px", textAlign: "center", marginTop: "20px" }}
+        >
+          Oops! It looks like you don't have permission to access this page.
+          <br />
+          Please <a href="/">click here</a> to return to the homepage
+        </div>
+      </PatientsContainer>
+    );
   }
 
   return (
@@ -68,7 +87,10 @@ export function Patients() {
             {filteredData.length > 0 ? (
               filteredData.map((item, index) => (
                 <React.Fragment key={index}>
-                  <TableRow onClick={() => toggleRow(index)} style={{ cursor: 'pointer' }}>
+                  <TableRow
+                    onClick={() => toggleRow(index)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <TableCell>{item.fullname}</TableCell>
                     <TableCell>{item.phone}</TableCell>
                     <TableCell>{item.email}</TableCell>
@@ -77,11 +99,25 @@ export function Patients() {
                   {expandedRow === index && (
                     <TableRow>
                       <TableCell colSpan="4">
-                        <div style={{ padding: "10px", backgroundColor: "#f9f9f9", border: "1px solid #ddd" }}>
-                          <Typography variant="body1">Name: {item.fullname}</Typography>
-                          <Typography variant="body1">Phone: {item.phone}</Typography>
-                          <Typography variant="body1">Email: {item.email}</Typography>
-                          <Typography variant="body1">Address: {item.address}</Typography>
+                        <div
+                          style={{
+                            padding: "10px",
+                            backgroundColor: "#f9f9f9",
+                            border: "1px solid #ddd",
+                          }}
+                        >
+                          <Typography variant="body1">
+                            Name: {item.fullname}
+                          </Typography>
+                          <Typography variant="body1">
+                            Phone: {item.phone}
+                          </Typography>
+                          <Typography variant="body1">
+                            Email: {item.email}
+                          </Typography>
+                          <Typography variant="body1">
+                            Address: {item.address}
+                          </Typography>
                         </div>
                       </TableCell>
                     </TableRow>
