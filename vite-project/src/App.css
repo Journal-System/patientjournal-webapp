@@ -7,7 +7,9 @@
 
 * {
   box-sizing: border-box;
-  overflow-x: hidden; /* Removes the horizontell scroll */
+  
+  /* Add this if any problem happens */
+  /* overflow-x: hidden; */ /* Removes the horizontell scroll */
 }
 
 .page-wrapper {

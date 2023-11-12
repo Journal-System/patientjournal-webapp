@@ -29,7 +29,6 @@ export function Patients() {
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
     if (userRole === "DOCTOR") {
-      console.log("NIGGA");
       setIsAuthorized(true);
     }
   }, []);
