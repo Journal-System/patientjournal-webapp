@@ -5,19 +5,19 @@ import {
   PatientWrapper,
   SelectedUser,
   StaffWrapper,
-} from "./MessagesStyles";
+} from "./UserSelectionStyles";
 import { Typography } from "@mui/material";
-import { useDoctorLogic } from "./MessagesLogic";
+import { useDoctorLogic } from "./UserSelectionLogic";
 
-export function Messages() {
-  const [selected, setSelected] = useState(null);
+export function UserSelection() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const { isLoading, doctorData, staffData, patientData, isError, error } =
     useDoctorLogic();
 
-  const selectUser = (user) => {
-    setSelected(user);
-    // Add logic to handle the selected doctor/staff, e.g., start a conversation
+  const selectUser = (email, id) => {
+    localStorage.setItem("selectedUserEmail", email);
+    localStorage.setItem("selectedUserId", id);
+    window.location.href = "/Messages/";
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function Messages() {
               patientData.map((patient, index) => (
                 <div
                   key={index}
-                  onClick={() => selectUser(patient)}
+                  onClick={() => selectUser(patient.email, patient.id)}
                   style={{
                     cursor: "pointer",
                     padding: "10px",
@@ -90,7 +90,7 @@ export function Messages() {
               doctorData.map((doctor, index) => (
                 <div
                   key={index}
-                  onClick={() => selectUser(doctor)}
+                  onClick={() => selectUser(doctor.email, doctor.id)}
                   style={{
                     cursor: "pointer",
                     padding: "10px",
@@ -112,7 +112,7 @@ export function Messages() {
               staffData.map((staff, index) => (
                 <div
                   key={index}
-                  onClick={() => selectUser(staff)}
+                  onClick={() => selectUser(staff.email, staff.id)}
                   style={{
                     cursor: "pointer",
                     padding: "10px",

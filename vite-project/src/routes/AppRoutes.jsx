@@ -4,7 +4,8 @@ import { Patients } from "../pages/PatientCatalog/PatientCatalogView";
 import { Home } from "../pages/Home/HomeView";
 import { Login } from "../pages/Login/LoginView";
 import { Register } from "../pages/Register/RegisterView";
-import { Messages } from "../pages/Messages/MessagesView";
+import { UserSelection } from "../pages/UserSelection/UserSelectionView";
+import { Messages } from "../pages/MessageCompose/MessageComposeView";
 
 export default function AppRoutes() {
   return (
@@ -59,6 +60,18 @@ export default function AppRoutes() {
         />
 
         <Route
+          path="/UserSelection"
+          element={
+            <>
+              <Helmet>
+                <title>Select User &bull; Patient Journal</title>
+              </Helmet>
+              <UserSelection />
+            </>
+          }
+        />
+
+        <Route
           path="/Messages"
           element={
             <>
@@ -69,7 +82,6 @@ export default function AppRoutes() {
             </>
           }
         />
-        
       </Routes>
     </HelmetProvider>
   );

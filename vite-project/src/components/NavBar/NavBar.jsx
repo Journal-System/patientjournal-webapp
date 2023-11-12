@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import patientLogo from "../../assets/patientlogo.png";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import {
@@ -17,6 +16,7 @@ export default function NavBar() {
   const [userEmail, setUserEmail] = useState(null);
   const [dropdown, setDropDowm] = useState(null);
   const [userRole, setUserRole] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const open = Boolean(dropdown);
 
   useEffect(() => {
@@ -29,10 +29,18 @@ export default function NavBar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userRole");
-    setUserEmail("");
-    window.location.href = "/Login";
+    setIsLoading(true);
+
+    setTimeout(() => {
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("userId");
+      
+      setUserEmail("");
+      setUserRole("");
+      setIsLoading(false);
+      window.location.href = "/";
+    }, 2000);
   };
 
   const handleClick = (event) => {
@@ -63,8 +71,9 @@ export default function NavBar() {
                   aria-haspopup="true"
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
+                  disabled={isLoading}
                 >
-                  Dashboard
+                  {isLoading ? "Logging out..." : "Dashboard"}
                 </StyledButton>
                 <Menu
                   id="basic-menu"
@@ -81,26 +90,12 @@ export default function NavBar() {
                   {userRole === "PATIENT" && (
                     <div>
                       <MenuItem onClick={handleClose}>My Profile</MenuItem>
-                      <MenuItem
-                        onClick={handleClose}
-                        component={Link}
-                        to="/Messages"
-                      >
-                        Messages
-                      </MenuItem>
                     </div>
                   )}
                   {userRole === "STAFF" && (
                     <div>
                       <MenuItem onClick={handleClose}>
                         Create Patient Note
-                      </MenuItem>
-                      <MenuItem
-                        onClick={handleClose}
-                        component={Link}
-                        to="/Messages"
-                      >
-                        Messages
                       </MenuItem>
                     </div>
                   )}
@@ -116,15 +111,15 @@ export default function NavBar() {
                       <MenuItem onClick={handleClose}>
                         Create Patient Note
                       </MenuItem>
-                      <MenuItem
-                        onClick={handleClose}
-                        component={Link}
-                        to="/Messages"
-                      >
-                        Messages
-                      </MenuItem>
                     </div>
                   )}
+                  <MenuItem
+                    onClick={handleClose}
+                    component={Link}
+                    to="/UserSelection"
+                  >
+                    Messages
+                  </MenuItem>
                   <MenuItem
                     onClick={() => {
                       handleLogout();

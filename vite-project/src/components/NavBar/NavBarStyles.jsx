@@ -18,14 +18,16 @@ export const NavItems = styled("div")`
 `;
 
 export const LogoText = styled("div")`
-  font-size: 1.5rem; 
-  color: #333; 
-  font-weight: 600; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  margin: 0 20px; 
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+  display: flex;
   white-space: nowrap;
+  position: absolute;
+  padding: center;
+  margin: center;
+  width: 55%;
+  justify-content: right;
 `;
 
 export const StyledLink = styled(Link)`
@@ -49,11 +51,11 @@ export const UserName = styled(Link)`
 
 export const StyledButton = styled(Button)`
   background-color: #5A8FBB;
-  color: #fff; /* White text color */
-  padding: 10px 20px; /* Padding for better spacing */
-  border-radius: 8px; /* Rounded corners */
+  color: #fff; 
+  padding: 10px 20px;
+  border-radius: 8px;
   font-weight: bold;
-  transition: background-color 0.3s ease; /* Smooth transition effect */
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #5A8FBB; 

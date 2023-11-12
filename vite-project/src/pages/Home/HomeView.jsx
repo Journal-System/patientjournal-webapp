@@ -8,13 +8,12 @@ import {
 import patientVideo from "../../assets/patient.mp4";
 
 export function Home() {
-  // Inline style to disable interaction
   const videoStyle = {
     width: "100%",
     maxWidth: "960px",
     height: "auto",
     borderRadius: "4px",
-    pointerEvents: "none", // This prevents the user from interacting with the video
+    pointerEvents: "none",
   };
 
   return (
@@ -31,7 +30,7 @@ export function Home() {
           style={videoStyle}
           autoPlay
           loop 
-          muted 
+          muted
         >
           <source src={patientVideo} type="video/mp4" />
           Your browser does not support the video tag.

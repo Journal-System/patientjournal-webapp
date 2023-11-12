@@ -66,6 +66,9 @@ export function Patients() {
       <Typography variant="h2" style={{ marginBottom: "20px" }}>
         Patients Information Directory
       </Typography>
+      <Typography variant="h6" style={{ marginBottom: "20px" }}>
+        Click on a patient to see all details about them
+      </Typography>
       <ContainerWrapper>
         <MyInput
           type="text"
