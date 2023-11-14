@@ -17,6 +17,8 @@ export function UserSelection() {
   const selectUser = (email, id) => {
     localStorage.setItem("selectedUserEmail", email);
     localStorage.setItem("selectedUserId", id);
+
+    
     window.location.href = "/Messages/";
   };
 

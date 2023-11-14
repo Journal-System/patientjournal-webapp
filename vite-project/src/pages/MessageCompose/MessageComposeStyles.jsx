@@ -21,6 +21,5 @@ export const MessagesWrapper = styled(Box)`
     padding: 1rem;
     background-color: #ffffff;
     width: 100%;
-    height: 300px;
     max-width: 1300px;
 `;

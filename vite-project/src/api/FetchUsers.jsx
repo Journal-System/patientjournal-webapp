@@ -21,46 +21,49 @@ export async function getAllUsers() {
 }
 
 export function postUser(newUser, onSuccess, onError) {
-    fetch("http://localhost:8080/patient/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
-    })
-    .then(response => {
+  fetch("http://localhost:8080/patient/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newUser),
+  })
+    .then((response) => {
       if (!response.ok) {
         throw new Error("This email is already being used");
       }
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       if (onSuccess) {
         onSuccess(data);
       }
     })
-    .catch(error => {
+    .catch((error) => {
       if (onError) {
         onError(error);
       }
     });
-  }
+}
 
 export function authenticate(email, password) {
   // Construct the query parameters
   const queryParams = new URLSearchParams({ email, password });
 
-  return fetch(`http://localhost:8080/authentication/login?${queryParams.toString()}`, {
-    method: "POST",
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.json(); // or response.text() if the response is not in JSON format
-    } else if (response.status === 401) {
-      throw new Error('Unauthorized');
-    } else {
-      throw new Error('An error occurred');
+  return fetch(
+    `http://localhost:8080/authentication/login?${queryParams.toString()}`,
+    {
+      method: "POST",
     }
-  })
-  .catch(error => {
-    throw error;
-  });
+  )
+    .then((response) => {
+      if (response.ok) {
+        return response.json(); // or response.text() if the response is not in JSON format
+      } else if (response.status === 401) {
+        throw new Error("Unauthorized");
+      } else {
+        throw new Error("An error occurred");
+      }
+    })
+    .catch((error) => {
+      throw error;
+    });
 }
