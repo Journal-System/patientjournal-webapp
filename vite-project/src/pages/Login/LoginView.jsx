@@ -29,7 +29,7 @@ export function Login() {
         localStorage.setItem("userEmail", email);
         localStorage.setItem("userId", data.id);
         localStorage.setItem("userRole", data.userRole);
-        
+
         setSuccessMessage("Login successful! Redirecting...");
         setTimeout(() => {
           window.location.href = "/";

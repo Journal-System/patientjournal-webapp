@@ -18,7 +18,6 @@ export function UserSelection() {
     localStorage.setItem("selectedUserEmail", email);
     localStorage.setItem("selectedUserId", id);
 
-    
     window.location.href = "/Messages/";
   };
 

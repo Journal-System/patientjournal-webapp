@@ -17,21 +17,27 @@ export function useProfileLogic(patientId) {
     isLoading: isConditionLoading,
     isError: isConditionError,
     error: conditionError,
-  } = useQuery(["condition", patientId], () => getAllConditionsForPatient(patientId));
+  } = useQuery(["condition", patientId], () =>
+    getAllConditionsForPatient(patientId)
+  );
 
   const {
     data: encounterData,
     isLoading: isEncounterLoading,
     isError: isEncounterError,
     error: encounterError,
-  } = useQuery(["encounter", patientId], () => getAllEncountersForPatient(patientId));
+  } = useQuery(["encounter", patientId], () =>
+    getAllEncountersForPatient(patientId)
+  );
 
   const {
     data: observationData,
     isLoading: isObservationLoading,
     isError: isObservationError,
     error: observationError,
-  } = useQuery(["observation", patientId], () => getAllObservationsForPatient(patientId));
+  } = useQuery(["observation", patientId], () =>
+    getAllObservationsForPatient(patientId)
+  );
 
   return {
     patientData,

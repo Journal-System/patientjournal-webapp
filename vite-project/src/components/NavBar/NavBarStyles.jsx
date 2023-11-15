@@ -50,14 +50,14 @@ export const UserName = styled(Link)`
 `;
 
 export const StyledButton = styled(Button)`
-  background-color: #5A8FBB;
-  color: #fff; 
+  background-color: #5a8fbb;
+  color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
   font-weight: bold;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #5A8FBB; 
+    background-color: #5a8fbb;
   }
 `;

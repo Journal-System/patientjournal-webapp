@@ -4,7 +4,7 @@ export function getMessagesBySenderAndReceiver(senderId, receiverId) {
   return fetch(url, {
     method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else if (response.status === 404) {
@@ -13,7 +13,7 @@ export function getMessagesBySenderAndReceiver(senderId, receiverId) {
         throw new Error("An error occurred");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error 1", error);
     });
 }
@@ -24,7 +24,7 @@ export function getMessagesByReceiverAndSender(receiverId, senderId) {
   return fetch(url, {
     method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.json();
       } else if (response.status === 404) {
@@ -33,11 +33,10 @@ export function getMessagesByReceiverAndSender(receiverId, senderId) {
         throw new Error("An error occurred");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error 2", error);
     });
 }
-
 
 export function addMessage(newMessage) {
   fetch("http://localhost:8080/message/addMessage", {

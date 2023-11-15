@@ -20,7 +20,7 @@ export function Messages() {
     const userEmail = localStorage.getItem("userEmail");
     if (userEmail) {
       setIsLoggedIn(true);
-  
+
       // Fetch messages for sender and receiver
       Promise.all([
         getMessagesBySenderAndReceiver(senderId, sentToId),
@@ -28,12 +28,12 @@ export function Messages() {
       ])
         .then(([senderMessages, receiverMessages]) => {
           // Ensure both senderMessages and receiverMessages are arrays
-          
+
           const combinedMessages = [
             ...(Array.isArray(senderMessages) ? senderMessages : []),
             ...(Array.isArray(receiverMessages) ? receiverMessages : []),
           ];
-  
+
           const sortedMessages = combinedMessages.sort(
             (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
           );

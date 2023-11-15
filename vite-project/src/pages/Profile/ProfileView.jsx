@@ -13,7 +13,7 @@ export function Profile() {
   if (userRole === "PATIENT") {
     realUserId = index;
   } else if (index != null) {
-    console.log("This index: " + index)
+    console.log("This index: " + index);
     realUserId = index;
   }
 
@@ -147,7 +147,7 @@ export function Profile() {
           )}
         </ProfileWrapper>
         <ProfileWrapper>
-        {observationData.length > 0 ? (
+          {observationData.length > 0 ? (
             observationData.map((observation, index) => (
               <div
                 key={index}
@@ -160,7 +160,9 @@ export function Profile() {
                 <Typography variant="body1" style={{ color: "red" }}>
                   Observation
                 </Typography>
-                <Typography variant="body1">{observation.observation}</Typography>
+                <Typography variant="body1">
+                  {observation.observation}
+                </Typography>
                 <Typography variant="body1" style={{ color: "red" }}>
                   Time
                 </Typography>
@@ -168,7 +170,9 @@ export function Profile() {
                 <Typography variant="body1" style={{ color: "red" }}>
                   Doctor
                 </Typography>
-                <Typography variant="body1">{observation.doctorOrStaffName}</Typography>
+                <Typography variant="body1">
+                  {observation.doctorOrStaffName}
+                </Typography>
               </div>
             ))
           ) : (

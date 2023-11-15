@@ -22,12 +22,12 @@ export const ContainerWrapper = styled(Box)`
 `;
 
 export const MyInput = styled("input")`
-  background-image: url('/css/searchicon.png');
+  background-image: url("/css/searchicon.png");
   background-position: 10px 12px;
   background-repeat: no-repeat;
   background-color: #ffffff;
   color: #000000;
-  ${'' /* width: 100%; */}
+  ${"" /* width: 100%; */}
   font-size: 16px;
   padding: 12px 50px 12px 20px;
   border: 2px solid #ddd;

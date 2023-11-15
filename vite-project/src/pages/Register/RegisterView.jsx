@@ -7,7 +7,7 @@ import {
   RegisterContainerWrapper,
   FormTitle,
   ErrorText,
-  SuccessText
+  SuccessText,
 } from "./RegisterStyles";
 import { postUser } from "../../api/FetchUsers";
 
@@ -25,11 +25,16 @@ export function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newUser = {
-      firstname, lastname, phone,
-      address, email, password
+      firstname,
+      lastname,
+      phone,
+      address,
+      email,
+      password,
     };
 
-    postUser(newUser, 
+    postUser(
+      newUser,
       () => {
         setSuccessMessage("Account created successfully! Redirecting...");
         setTimeout(() => {
@@ -37,16 +42,16 @@ export function Register() {
         }, 2000);
       },
       (error) => {
-        setError(error.message); 
+        setError(error.message);
       }
     );
   };
 
   const handleInputChange = (setter) => (event) => {
     if (error) {
-      setError(""); 
+      setError("");
     }
-    setter(event.target.value); 
+    setter(event.target.value);
   };
 
   useEffect(() => {
@@ -66,7 +71,7 @@ export function Register() {
           to access your account.
         </div>
       </RegisterContainer>
-    )
+    );
   }
   return (
     <RegisterContainer>

@@ -20,5 +20,5 @@ export const ProfileWrapper = styled(Box)`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding: 100px;
   margin-left: 50px;
-  width: 100%
+  width: 100%;
 `;

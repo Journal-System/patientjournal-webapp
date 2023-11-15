@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export async function getAllEncountersForPatient(id) {
+export async function getAllObservationsForPatient(id) {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/encounter/getAll/${id}`,
+      url: `http://localhost:8080/observation/getAll/${id}`,
     };
 
     const response = await axios.request(options);

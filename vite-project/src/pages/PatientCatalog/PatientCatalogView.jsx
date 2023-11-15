@@ -26,12 +26,7 @@ export function Patients() {
     navigate(`/Profile/${index}`);
   };
 
-  const {
-    isLoading,
-    usersData,
-    isError,
-    error,
-  } = usePatientLogic();
+  const { isLoading, usersData, isError, error } = usePatientLogic();
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
@@ -105,7 +100,7 @@ export function Patients() {
               filteredData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow
-                    onClick={() =>  handleRowClick(item.id)}
+                    onClick={() => handleRowClick(item.id)}
                     style={{ cursor: "pointer" }}
                   >
                     <TableCell>{item.fullname}</TableCell>

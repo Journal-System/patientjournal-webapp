@@ -26,12 +26,7 @@ export function Home() {
         accessible whenever you need it.
       </DescriptionStyle>
       <HomeContainerWrapper>
-        <video
-          style={videoStyle}
-          autoPlay
-          loop 
-          muted
-        >
+        <video style={videoStyle} autoPlay loop muted>
           <source src={patientVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
