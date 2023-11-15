@@ -10,21 +10,28 @@ import {
   TableRow,
 } from "./PatientCatalogStyles";
 import { usePatientLogic } from "./PatientLogic";
+import { useNavigate } from "react-router-dom";
 
 export function Patients() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [expandedRow, setExpandedRow] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toUpperCase());
   };
 
-  const toggleRow = (index) => {
-    setExpandedRow(expandedRow === index ? null : index);
+  const handleRowClick = (index) => {
+    // Navigate to the Profile route with the index as a parameter
+    navigate(`/Profile/${index}`);
   };
 
-  const { isLoading, usersData, isError, error } = usePatientLogic();
+  const {
+    isLoading,
+    usersData,
+    isError,
+    error,
+  } = usePatientLogic();
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
@@ -40,11 +47,19 @@ export function Patients() {
     ) || [];
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <PatientsContainer>
+        <div>Loading...</div>
+      </PatientsContainer>
+    );
   }
 
-  if (isError) {
-    return <div>Error: {error.message}</div>;
+  if (isError || error) {
+    return (
+      <PatientsContainer>
+        <div>Error: {error.message}</div>
+      </PatientsContainer>
+    );
   }
 
   if (!isAuthorized) {
@@ -90,7 +105,7 @@ export function Patients() {
               filteredData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow
-                    onClick={() => toggleRow(index)}
+                    onClick={() =>  handleRowClick(item.id)}
                     style={{ cursor: "pointer" }}
                   >
                     <TableCell>{item.fullname}</TableCell>
@@ -98,32 +113,6 @@ export function Patients() {
                     <TableCell>{item.email}</TableCell>
                     <TableCell>{item.address}</TableCell>
                   </TableRow>
-                  {expandedRow === index && (
-                    <TableRow>
-                      <TableCell colSpan="4">
-                        <div
-                          style={{
-                            padding: "10px",
-                            backgroundColor: "#f9f9f9",
-                            border: "1px solid #ddd",
-                          }}
-                        >
-                          <Typography variant="body1">
-                            Name: {item.fullname}
-                          </Typography>
-                          <Typography variant="body1">
-                            Phone: {item.phone}
-                          </Typography>
-                          <Typography variant="body1">
-                            Email: {item.email}
-                          </Typography>
-                          <Typography variant="body1">
-                            Address: {item.address}
-                          </Typography>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  )}
                 </React.Fragment>
               ))
             ) : (

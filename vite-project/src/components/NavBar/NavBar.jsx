@@ -17,6 +17,7 @@ export default function NavBar() {
   const [dropdown, setDropDowm] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const index = localStorage.getItem("userId");
   const open = Boolean(dropdown);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function NavBar() {
       localStorage.removeItem("userEmail");
       localStorage.removeItem("userRole");
       localStorage.removeItem("userId");
-      
+
       setUserEmail("");
       setUserRole("");
       setIsLoading(false);
@@ -89,7 +90,15 @@ export default function NavBar() {
                   </MenuItem>
                   {userRole === "PATIENT" && (
                     <div>
-                      <MenuItem onClick={handleClose}>My Profile</MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          handleClose();
+                        }}
+                        component={Link}
+                        to={`/Profile/${index}`}
+                      >
+                        My Profile
+                      </MenuItem>
                     </div>
                   )}
                   {userRole === "STAFF" && (

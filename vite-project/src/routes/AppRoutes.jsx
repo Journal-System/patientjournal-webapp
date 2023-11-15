@@ -6,6 +6,7 @@ import { Login } from "../pages/Login/LoginView";
 import { Register } from "../pages/Register/RegisterView";
 import { UserSelection } from "../pages/UserSelection/UserSelectionView";
 import { Messages } from "../pages/MessageCompose/MessageComposeView";
+import { Profile } from "../pages/Profile/ProfileView";
 
 export default function AppRoutes() {
   return (
@@ -79,6 +80,18 @@ export default function AppRoutes() {
                 <title>Messages &bull; Patient Journal</title>
               </Helmet>
               <Messages />
+            </>
+          }
+        />
+
+        <Route
+          path="/Profile/:index"
+          element={
+            <>
+              <Helmet>
+                <title>Profile &bull; Patient Journal</title>
+              </Helmet>
+              <Profile />
             </>
           }
         />
