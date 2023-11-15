@@ -103,7 +103,11 @@ export default function NavBar() {
                   )}
                   {userRole === "STAFF" && (
                     <div>
-                      <MenuItem onClick={handleClose}>
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/Observation"
+                      >
                         Create Patient Note
                       </MenuItem>
                     </div>
@@ -117,7 +121,11 @@ export default function NavBar() {
                       >
                         Patient List
                       </MenuItem>
-                      <MenuItem onClick={handleClose}>
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/Observation"
+                      >
                         Create Patient Note
                       </MenuItem>
                     </div>

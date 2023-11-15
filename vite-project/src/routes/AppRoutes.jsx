@@ -7,6 +7,8 @@ import { Register } from "../pages/Register/RegisterView";
 import { UserSelection } from "../pages/UserSelection/UserSelectionView";
 import { Messages } from "../pages/MessageCompose/MessageComposeView";
 import { Profile } from "../pages/Profile/ProfileView";
+import { ObservationList } from "../pages/Observation/ObservationList";
+import { ObservationForm } from "../pages/Observation/ObservationForm";
 
 export default function AppRoutes() {
   return (
@@ -92,6 +94,30 @@ export default function AppRoutes() {
                 <title>Profile &bull; Patient Journal</title>
               </Helmet>
               <Profile />
+            </>
+          }
+        />
+
+        <Route
+          path="/Observation"
+          element={
+            <>
+              <Helmet>
+                <title>Observation &bull; Patient Journal</title>
+              </Helmet>
+              <ObservationList />
+            </>
+          }
+        />
+
+        <Route
+          path="/ObservationForm"
+          element={
+            <>
+              <Helmet>
+                <title>ObservationForm &bull; Patient Journal</title>
+              </Helmet>
+              <ObservationForm />
             </>
           }
         />

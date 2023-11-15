@@ -19,3 +19,27 @@ export async function getAllObservationsForPatient(id) {
     }
   }
 }
+
+export function addOneObservation(observation, patientId, staffOrDoctorId) {
+  const queryParams = new URLSearchParams({
+    observation: observation,
+    patientId: patientId.toString(),
+    staffOrDoctorId: staffOrDoctorId.toString(),
+  });
+
+  return fetch(`http://localhost:8080/observation/add?${queryParams.toString()}`, {
+    method: "POST",
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else if (response.status === 401) {
+        throw new Error("Unauthorized");
+      } else {
+        throw new Error("An error occurred");
+      }
+    })
+    .catch((error) => {
+      throw error;
+    });
+}
