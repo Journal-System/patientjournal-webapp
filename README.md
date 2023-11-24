@@ -10,6 +10,9 @@ This is a web application for the Patient Journal. It is built with React and us
 3. Run `npm install` to install the dependencies
 4. Run `npm start` to start the server
 
+## Docker
+Run `docker-compose up --build` to build the project
+
 ## Usage
 1. Run `npm start` to start the server
 2. Open a browser and go to `localhost:4000`
