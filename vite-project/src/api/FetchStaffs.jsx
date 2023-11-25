@@ -4,7 +4,7 @@ export async function getAllStaffs() {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/staff/getAllStaffs`,
+      url: `http://localhost:8081/staff/getAllStaffs`,
     };
 
     const response = await axios.request(options);

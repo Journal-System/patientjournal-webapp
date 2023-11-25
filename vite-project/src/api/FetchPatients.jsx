@@ -4,7 +4,7 @@ export async function getAllPatients() {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/patient/getAllPatients`,
+      url: `http://localhost:8081/patient/getAllPatients`,
     };
 
     const response = await axios.request(options);
@@ -25,7 +25,7 @@ export async function getOnePatient(id) {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/patient/get/${id}`,
+      url: `http://localhost:8081/patient/get/${id}`,
     };
 
     const response = await axios.request(options);

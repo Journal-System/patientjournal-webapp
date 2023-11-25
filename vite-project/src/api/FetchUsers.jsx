@@ -4,7 +4,7 @@ export async function getAllUsers() {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/patient/getAllPatients`,
+      url: `http://localhost:8081/patient/getAllPatients`,
     };
 
     const response = await axios.request(options);
@@ -21,7 +21,7 @@ export async function getAllUsers() {
 }
 
 export function postUser(newUser, onSuccess, onError) {
-  fetch("http://localhost:8080/patient/add", {
+  fetch("http://localhost:8081/patient/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newUser),
@@ -49,7 +49,7 @@ export function authenticate(email, password) {
   const queryParams = new URLSearchParams({ email, password });
 
   return fetch(
-    `http://localhost:8080/authentication/login?${queryParams.toString()}`,
+    `http://localhost:8081/authentication/login?${queryParams.toString()}`,
     {
       method: "POST",
     }

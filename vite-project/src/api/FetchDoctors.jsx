@@ -4,7 +4,7 @@ export async function getAllDoctors() {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/doctor/getAllDoctors`,
+      url: `http://localhost:8081/doctor/getAllDoctors`,
     };
 
     const response = await axios.request(options);
