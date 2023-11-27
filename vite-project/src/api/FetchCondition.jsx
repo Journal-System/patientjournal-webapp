@@ -4,7 +4,7 @@ export async function getAllConditionsForPatient(id) {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8080/condition/getAll/${id}`,
+      url: `http://localhost:8082/condition/getAll/${id}`,
     };
 
     const response = await axios.request(options);
