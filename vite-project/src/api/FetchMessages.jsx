@@ -1,5 +1,5 @@
 export function getMessagesBySenderAndReceiver(senderId, receiverId) {
-  const url = `http://localhost:8080/message/getMessagesBySenderAndReceiver?senderId=${senderId}&receiverId=${receiverId}`;
+  const url = `http://localhost:8083/message/getMessagesBySenderAndReceiver?senderId=${senderId}&receiverId=${receiverId}`;
 
   return fetch(url, {
     method: "GET",
@@ -19,7 +19,7 @@ export function getMessagesBySenderAndReceiver(senderId, receiverId) {
 }
 
 export function getMessagesByReceiverAndSender(receiverId, senderId) {
-  const url = `http://localhost:8080/message/getMessagesBySenderAndReceiver?senderId=${receiverId}&receiverId=${senderId}`;
+  const url = `http://localhost:8083/message/getMessagesBySenderAndReceiver?senderId=${receiverId}&receiverId=${senderId}`;
 
   return fetch(url, {
     method: "GET",
@@ -39,7 +39,7 @@ export function getMessagesByReceiverAndSender(receiverId, senderId) {
 }
 
 export function addMessage(newMessage) {
-  fetch("http://localhost:8080/message/addMessage", {
+  fetch("http://localhost:8083/message/addMessage", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newMessage),
