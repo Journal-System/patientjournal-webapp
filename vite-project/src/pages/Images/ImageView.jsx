@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ImagesMainContainer } from "./ImageStyles";
 import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { getImageById, uploadImage } from "../../api/FetchImages";
-import { padding } from "@mui/system";
+import Canvas from '../../components/Canvas/Canvas'
 
 export function Images() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [imageId, setImageId] = useState("");
     const [openDialog, setOpenDialog] = useState(false);
     const [imageData, setImageData] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
-
+    const [isAuthorized, setIsAuthorized] = useState(false);
+    const canvasRef = useRef(null);
     const userEmail = localStorage.getItem("userEmail");
 
     useEffect(() => {
-        if (userEmail) {
-            setIsLoggedIn(true);
+        const userRole = localStorage.getItem("userRole");
+        if (userRole === "DOCTOR") {
+            setIsAuthorized(true);
         }
-    }, [userEmail]);
+    }, []);
 
     const handleDialogOpen = () => {
         setOpenDialog(true);
@@ -54,6 +55,7 @@ export function Images() {
                 console.log('Image uploaded successfully!');
                 // Clear the selected file after upload
                 setSelectedFile(null);
+                handleDialogClose();
             } else {
                 console.log('No file selected');
             }
@@ -64,22 +66,25 @@ export function Images() {
 
     return (
         <ImagesMainContainer>
-            {!isLoggedIn && (
+            {!isAuthorized && (
                 <div style={{ fontSize: "100px", textAlign: "center", marginTop: "200px" }}>
-                    Access denied. You are currently logged out.
+                    Access denied.
                 </div>
             )}
-            {isLoggedIn && (
+            {isAuthorized && (
                 <>
                     <Typography variant="h4" gutterBottom>
                         Welcome, {userEmail}!
                     </Typography>
+
+                    {/* Pop-up window button */}
                     <div style={{ padding: '10px' }}>
                         <Button variant="outlined" onClick={handleDialogOpen}>
                             Get or upload an image
                         </Button>
                     </div>
 
+                    {/* Get image section*/}
                     <Dialog open={openDialog} onClose={handleDialogClose}>
                         <div style={{ top: '10px', left: '10px', border: '1px solid black', padding: '10px' }}>
                             <Typography variant="subtitle1" gutterBottom>
@@ -107,18 +112,55 @@ export function Images() {
                                 <p>Selected File: {selectedFile.name}</p>
                             )}
                             <DialogActions>
-                                <Button onClick={handleUpload} disabled={!selectedFile}>Upload Image</Button>
+                                {(selectedFile && !selectedFile.name.includes(".png")) ? (
+                                    <Typography>
+                                        Must be a .png file
+                                    </Typography>
+                                ) : (
+                                    <Button onClick={handleUpload} disabled={!selectedFile}>
+                                        Upload Image
+                                    </Button>
+                                )}
                             </DialogActions>
-
                         </div>
                         <Button onClick={handleDialogClose}>Cancel</Button>
 
 
 
                     </Dialog>
+
+
                     {imageData && (
-                        <div style={{ position: 'center' }}>
-                            <img src={imageData} alt="Fetched Image" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <div
+                            style={{
+                                position: 'relative',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '100vh',
+                                border: '10px solid black',
+                                boxSizing: 'border-box',
+                                overflow: 'hidden', // Ensure that the canvas won't overflow the image
+                            }}
+                        >
+                        
+                 
+                        
+                            {/* Image */}
+                            <img
+                                src={imageData}
+                                alt="Fetched Image"
+                                style={{
+                                    objectFit: 'contain',
+                                    maxWidth: '100%',
+                                    maxHeight: '100%',
+                                }}
+                            />
+
+                            {/* Canvas overlay */}
+
+                                <Canvas canvasRef={canvasRef} />
+                            
                         </div>
                     )}
                 </>
