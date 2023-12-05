@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-const Canvas = ({ }) => {
-  const canvasRef = useRef(null);
+const Canvas = ({ canvasRef, imageData }) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -39,6 +38,18 @@ const Canvas = ({ }) => {
       context.moveTo(mouseX, mouseY);
     };
 
+    if (imageData) {
+        const img = new Image()
+        img.src = imageData
+        img.onload = () => {
+            context.drawImage(img, 0, 0, canvas.width, canvas.height)
+        }
+    }
+
+    canvasRef.current.clearCanvas = () => {
+        context.clearRect(0,0,canvas.width,canvas.height)
+    }
+
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mousemove', draw);
@@ -48,12 +59,12 @@ const Canvas = ({ }) => {
       canvas.removeEventListener('mouseup', stopDrawing);
       canvas.removeEventListener('mousemove', draw);
     };
-  }, [ ]);
+  }, [canvasRef, imageData]);
 
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: '100%', height: '100%', position: 'absolute' }}
+      style={{ width: '100%', height: '100%'/*, position: 'absolute'*/ }}
     />
   );
 };

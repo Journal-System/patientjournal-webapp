@@ -64,6 +64,12 @@ export function Images() {
         }
     };
 
+    const clearCanvas = () => {
+        if(canvasRef.current) {
+            canvasRef.current.clearCanvas()
+        }
+    }
+
     return (
         <ImagesMainContainer>
             {!isAuthorized && (
@@ -84,8 +90,9 @@ export function Images() {
                         </Button>
                     </div>
 
-                    {/* Get image section*/}
+                    {/* Get/Upload image section*/}
                     <Dialog open={openDialog} onClose={handleDialogClose}>
+                        {/* Get Image Section*/}
                         <div style={{ top: '10px', left: '10px', border: '1px solid black', padding: '10px' }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 Get Image from Database
@@ -124,9 +131,6 @@ export function Images() {
                             </DialogActions>
                         </div>
                         <Button onClick={handleDialogClose}>Cancel</Button>
-
-
-
                     </Dialog>
 
 
@@ -144,10 +148,10 @@ export function Images() {
                             }}
                         >
                         
-                 
+                        <Canvas canvasRef={canvasRef} imageData={imageData} style = {{objectFit: 'contain'}}>
                         
                             {/* Image */}
-                            <img
+                            {/* <img
                                 src={imageData}
                                 alt="Fetched Image"
                                 style={{
@@ -155,14 +159,21 @@ export function Images() {
                                     maxWidth: '100%',
                                     maxHeight: '100%',
                                 }}
-                            />
+                            /> */}
 
-                            {/* Canvas overlay */}
+                            </Canvas>
+                      
 
-                                <Canvas canvasRef={canvasRef} />
                             
                         </div>
                     )}
+
+                    <button onClick={clearCanvas}>
+                        Clear Canvas
+                    </button>
+
+                                
+
                 </>
             )}
         </ImagesMainContainer>
