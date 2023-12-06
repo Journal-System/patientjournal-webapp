@@ -49,4 +49,25 @@ export async function uploadImage(imageFile) {
   }
 }
 
+export async function saveImagewithId(id, imageFile) {
+    try {
+      const formData = new FormData();
+      formData.append('image', imageFile);
+  
+      const response = await axios.post(`http://localhost:8084/save/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      console.log('Image saved successfully:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error saving image:', error.toJSON ? error.toJSON() : error);
+      throw new Error('Image save failed');
+    }
+  }
+  
+
+
   

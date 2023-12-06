@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ImagesMainContainer } from "./ImageStyles";
+import { ImagesMainContainer, CanvasContainer } from "./ImageStyles";
 import { Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
-import { getImageById, uploadImage } from "../../api/FetchImages";
-import Canvas from '../../components/Canvas/Canvas'
+import { getImageById, uploadImage, saveImagewithId} from "../../api/FetchImages";
 
 export function Images() {
     const [imageId, setImageId] = useState("");
@@ -10,15 +9,33 @@ export function Images() {
     const [imageData, setImageData] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isAuthorized, setIsAuthorized] = useState(false);
+    const [text, setText] = useState("");
+    const [isTextInput, setIsTextInput] = useState(false);
+
     const canvasRef = useRef(null);
-    const userEmail = localStorage.getItem("userEmail");
+    const drawingRef = useRef(false);
 
     useEffect(() => {
         const userRole = localStorage.getItem("userRole");
         if (userRole === "DOCTOR") {
             setIsAuthorized(true);
         }
-    }, []);
+
+        if (imageData) {
+            const canvas = canvasRef.current
+            const context = canvas.getContext("2d")
+
+            const img = new Image()
+            img.src = imageData
+            context.clearRect(0,0,canvas.width,canvas.height)
+
+            img.onload = () => {
+                context.drawImage(img, 0, 0, canvas.width, canvas.height)
+            }
+        }
+
+
+    }, [imageData]);
 
     const handleDialogOpen = () => {
         setOpenDialog(true);
@@ -51,9 +68,7 @@ export function Images() {
         try {
             if (selectedFile) {
                 await uploadImage(selectedFile);
-                // Optionally, you can do something after successful upload
                 console.log('Image uploaded successfully!');
-                // Clear the selected file after upload
                 setSelectedFile(null);
                 handleDialogClose();
             } else {
@@ -64,11 +79,74 @@ export function Images() {
         }
     };
 
-    const clearCanvas = () => {
-        if(canvasRef.current) {
-            canvasRef.current.clearCanvas()
+    const saveCanvasAsImage = async () => {
+        const canvas = canvasRef.current;
+      
+        // Get the data URL of the canvas content
+        const dataUrl = canvas.toDataURL();
+      
+        // Convert the data URL to a Blob
+        const blob = await (await fetch(dataUrl)).blob();
+      
+        // Create a File from the Blob
+        const file = new File([blob], "canvas_image.png", { type: "image/png" });
+
+      
+        try {
+          // Use the saveImageWithId function to save the canvas image to the database
+          await saveImagewithId(imageId, file);
+          console.log("Canvas image saved successfully");
+        } catch (error) {
+          console.error("Error saving canvas image:", error.message);
         }
-    }
+      };
+
+    const handleMouseDown = (e) => {
+        if (isTextInput) {
+            // Ignore drawing lines when text input is active
+            return;
+        }
+
+        drawingRef.current = true;
+        const context = canvasRef.current.getContext("2d");
+        context.beginPath();
+        context.moveTo(
+            e.clientX - canvasRef.current.offsetLeft,
+            e.clientY - canvasRef.current.offsetTop
+        );
+    };
+
+    const handleMouseMove = (e) => {
+        if (!drawingRef.current || isTextInput) return;
+        const context = canvasRef.current.getContext("2d");
+        context.lineTo(
+            e.clientX - canvasRef.current.offsetLeft,
+            e.clientY - canvasRef.current.offsetTop
+        );
+        context.stroke();
+    };
+
+    const handleMouseUp = () => {
+        drawingRef.current = false;
+    };
+
+    const handleTextInput = () => {
+        setIsTextInput(!isTextInput);
+        setText(""); // Clear text when toggling text input
+    };
+
+    const handleTextChange = (event) => {
+        setText(event.target.value);
+    };
+
+    const handleTextDraw = (e) => {
+        const context = canvasRef.current.getContext("2d");
+        context.font = "20px Arial"; // Set the font style
+        context.fillStyle = "black"; // Set the text color
+        context.fillText(text, e.clientX - canvasRef.current.offsetLeft, e.clientY - canvasRef.current.offsetTop);
+    };
+
+
 
     return (
         <ImagesMainContainer>
@@ -79,10 +157,6 @@ export function Images() {
             )}
             {isAuthorized && (
                 <>
-                    <Typography variant="h4" gutterBottom>
-                        Welcome, {userEmail}!
-                    </Typography>
-
                     {/* Pop-up window button */}
                     <div style={{ padding: '10px' }}>
                         <Button variant="outlined" onClick={handleDialogOpen}>
@@ -135,45 +209,35 @@ export function Images() {
 
 
                     {imageData && (
-                        <div
-                            style={{
-                                position: 'relative',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: '100vh',
-                                border: '10px solid black',
-                                boxSizing: 'border-box',
-                                overflow: 'hidden', // Ensure that the canvas won't overflow the image
-                            }}
-                        >
-                        
-                        <Canvas canvasRef={canvasRef} imageData={imageData} style = {{objectFit: 'contain'}}>
-                        
-                            {/* Image */}
-                            {/* <img
-                                src={imageData}
-                                alt="Fetched Image"
-                                style={{
-                                    objectFit: 'contain',
-                                    maxWidth: '100%',
-                                    maxHeight: '100%',
-                                }}
-                            /> */}
-
-                            </Canvas>
-                      
-
-                            
-                        </div>
+                        <CanvasContainer>
+                            <canvas
+                                ref={canvasRef}
+                                width={500}
+                                height={500}
+                                style={{ border: "10px solid black", overflow: "hidden" }}
+                                onMouseDown={handleMouseDown}
+                                onMouseMove={handleMouseMove}
+                                onMouseUp={handleMouseUp}
+                                onClick={isTextInput ? handleTextDraw : null}
+                            />
+                            <div>
+                                <Button variant="outlined" onClick={handleTextInput}>
+                                    {isTextInput ? "Finish adding text" : "Add Text"}
+                                </Button>
+                                {isTextInput && (
+                                    <TextField
+                                        label="Enter Text"
+                                        variant="outlined"
+                                        value={text}
+                                        onChange={handleTextChange}
+                                    />
+                                )}
+                                <Button variant="outlined" onClick={saveCanvasAsImage}>
+                                    Save Image
+                                </Button>
+                            </div>
+                        </CanvasContainer>
                     )}
-
-                    <button onClick={clearCanvas}>
-                        Clear Canvas
-                    </button>
-
-                                
-
                 </>
             )}
         </ImagesMainContainer>

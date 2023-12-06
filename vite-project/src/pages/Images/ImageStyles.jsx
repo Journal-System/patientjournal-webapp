@@ -12,3 +12,10 @@ export const ImagesMainContainer = styled("div")`
   text-align: center;
   height: 100%;
 `;
+
+export const CanvasContainer = styled("div")`
+maxWidth: 100%;
+width: 'auto';
+maxHeight: 100%;
+height: 'auto';
+`;
