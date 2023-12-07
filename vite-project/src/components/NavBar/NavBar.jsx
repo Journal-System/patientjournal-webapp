@@ -128,6 +128,13 @@ export default function NavBar() {
                       >
                         Create Patient Note
                       </MenuItem>
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/Images"
+                      >
+                        Image handling
+                      </MenuItem>
                     </div>
                   )}
                   <MenuItem

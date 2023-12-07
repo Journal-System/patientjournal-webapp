@@ -9,6 +9,7 @@ import { Messages } from "../pages/MessageCompose/MessageComposeView";
 import { Profile } from "../pages/Profile/ProfileView";
 import { ObservationList } from "../pages/Observation/ObservationList";
 import { ObservationForm } from "../pages/Observation/ObservationForm";
+import { Images } from "../pages/Images/ImageView"
 
 export default function AppRoutes() {
   return (
@@ -121,6 +122,20 @@ export default function AppRoutes() {
             </>
           }
         />
+
+        <Route
+          path="/Images"
+          element={
+            <>
+              <Helmet>
+                <title>Image Service &bull; Patient Journal</title>
+              </Helmet>
+              <Images />
+            </>
+          }
+        />
+
+
       </Routes>
     </HelmetProvider>
   );
