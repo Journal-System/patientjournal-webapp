@@ -1,7 +1,7 @@
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AppRoutes from "./routes/AppRoutes";
-import NavBar from "./components/Navbar/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 
 export default function App() {
   const queryClient = new QueryClient();
