@@ -9,6 +9,7 @@ import { Messages } from "../pages/MessageCompose/MessageComposeView";
 import { Profile } from "../pages/Profile/ProfileView";
 import { ObservationList } from "../pages/Observation/ObservationList";
 import { ObservationForm } from "../pages/Observation/ObservationForm";
+import { Search } from "../pages/Search/SearchView";
 
 export default function AppRoutes() {
   return (
@@ -118,6 +119,18 @@ export default function AppRoutes() {
                 <title>ObservationForm &bull; Patient Journal</title>
               </Helmet>
               <ObservationForm />
+            </>
+          }
+        />
+
+        <Route
+          path="/Search"
+          element={
+            <>
+              <Helmet>
+                <title>Search &bull; Patient Journal</title>
+              </Helmet>
+              <Search />
             </>
           }
         />

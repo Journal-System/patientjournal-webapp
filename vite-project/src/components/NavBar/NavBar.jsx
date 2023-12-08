@@ -110,6 +110,13 @@ export default function NavBar() {
                       >
                         Create Patient Note
                       </MenuItem>
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/Search"
+                      >
+                        Search
+                      </MenuItem>
                     </div>
                   )}
                   {userRole === "DOCTOR" && (
@@ -127,6 +134,13 @@ export default function NavBar() {
                         to="/Observation"
                       >
                         Create Patient Note
+                      </MenuItem>
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/Search"
+                      >
+                        Search
                       </MenuItem>
                     </div>
                   )}
