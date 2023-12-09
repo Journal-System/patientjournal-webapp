@@ -28,7 +28,7 @@ export function Login() {
         console.log("Login successful with data:", data);
         localStorage.setItem("userEmail", email);
         localStorage.setItem("userId", data.id);
-        localStorage.setItem("userRole", data.userRole);
+        localStorage.setItem("userRole", data.role);
 
         setSuccessMessage("Login successful! Redirecting...");
         setTimeout(() => {
