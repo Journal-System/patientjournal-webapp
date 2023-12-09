@@ -4,7 +4,7 @@ export async function getAllDoctors() {
   try {
     const options = {
       method: "GET",
-      url: `http://user-service.app.cloud.cbh.kth.se/doctor/getAllDoctors`,
+      url: `https://user-service.app.cloud.cbh.kth.se/doctor/getAllDoctors`,
     };
 
     const response = await axios.request(options);

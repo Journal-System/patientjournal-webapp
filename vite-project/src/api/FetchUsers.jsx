@@ -4,7 +4,7 @@ export async function getAllUsers() {
   try {
     const options = {
       method: "GET",
-      url: `http://user-service.app.cloud.cbh.kth.se/patient/getAllPatients`,
+      url: `https://user-service.app.cloud.cbh.kth.se/patient/getAllPatients`,
     };
 
     const response = await axios.request(options);
@@ -21,7 +21,7 @@ export async function getAllUsers() {
 }
 
 export function postUser(newUser, onSuccess, onError) {
-  fetch("http://user-service.app.cloud.cbh.kth.se/patient/add", {
+  fetch("https://user-service.app.cloud.cbh.kth.se/patient/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newUser),
@@ -49,7 +49,7 @@ export function authenticate(email, password) {
   const queryParams = new URLSearchParams({ email, password });
 
   return fetch(
-    `http://user-service.app.cloud.cbh.kth.se/authentication/login?${queryParams.toString()}`,
+    `https://user-service.app.cloud.cbh.kth.se/authentication/login?${queryParams.toString()}`,
     {
       method: "POST",
     }
