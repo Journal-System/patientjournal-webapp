@@ -36,152 +36,158 @@ export function Profile() {
     observationData,
   } = useProfileLogic(realUserId);
 
-  if (
-    isPatientLoading ||
-    isConditionLoading ||
-    isEncounterLoading ||
-    isObservationLoading
-  ) {
-    return <div>Loading...</div>;
-  }
-
-  if (isPatientError && patientError) {
-    return <div>Error: {patientError.message}</div>;
-  }
-
-  if (isConditionError && conditionError) {
-    return <div>Error: {conditionError.message}</div>;
-  }
-
-  if (isEncounterError && encounterError) {
-    return <div>Error: {encounterError.message}</div>;
-  }
-
-  if (isObservationError && observationError) {
-    return <div>Error: {observationError.message}</div>;
-  }
-
   return (
     <ProfileContainer>
-      <Typography variant="h4">Name: {patientData.fullname}</Typography>
-      <Typography variant="body1">Phone: {patientData.phone}</Typography>
-      <Typography variant="body1">Email: {patientData.email}</Typography>
-      <Typography variant="body1">Address: {patientData.address}</Typography>
-      <Typography variant="body1">Type: {patientData.userRole}</Typography>
-      <div
-        style={{
-          display: "flex",
-          paddingTop: "10px",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography variant="h5" style={{ paddingLeft: "190px" }}>
-          Conditions
-        </Typography>
-        <Typography variant="h5">Encounter</Typography>
-        <Typography variant="h5" style={{ paddingRight: "130px" }}>
-          Observation
-        </Typography>
-      </div>
-      <div style={{ display: "flex", paddingTop: "40px" }}>
-        <ProfileWrapper>
-          {conditionData.length > 0 ? (
-            conditionData.map((condition, index) => (
-              <div
-                key={index}
-                style={{
-                  cursor: "pointer",
-                  padding: "10px",
-                  borderBottom: "1px solid #ccc",
-                }}
-              >
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Condition
-                </Typography>
-                <Typography variant="body1">{condition.condition}</Typography>
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Description
-                </Typography>
-                <Typography variant="body1">{condition.description}</Typography>
-              </div>
-            ))
-          ) : (
-            <Typography variant="body1">
-              No conditions for this patient
+      {isPatientLoading ||
+      isConditionLoading ||
+      isEncounterLoading ||
+      isObservationLoading ? (
+        <div>Loading...</div>
+      ) : null}
+
+      {isPatientError && patientError ? (
+        <div>Error: {patientError.message}</div>
+      ) : null}
+
+      {isConditionError && conditionError ? (
+        <div>Error: {conditionError.message}</div>
+      ) : null}
+
+      {isEncounterError && encounterError ? (
+        <div>Error: {encounterError.message}</div>
+      ) : null}
+
+      {isObservationError && observationError ? (
+        <div>Error: {observationError.message}</div>
+      ) : null}
+
+      {!isPatientLoading && !isConditionLoading && !isEncounterLoading && !isObservationLoading && (
+        <>
+          <Typography variant="h4">Name: {patientData.fullname}</Typography>
+          <Typography variant="body1">Phone: {patientData.phone}</Typography>
+          <Typography variant="body1">Email: {patientData.email}</Typography>
+          <Typography variant="body1">Address: {patientData.address}</Typography>
+          <Typography variant="body1">Type: {patientData.userRole}</Typography>
+
+          <div
+            style={{
+              display: "flex",
+              paddingTop: "10px",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography variant="h5" style={{ paddingLeft: "190px" }}>
+              Conditions
             </Typography>
-          )}
-        </ProfileWrapper>
-        <ProfileWrapper>
-          {encounterData.length > 0 ? (
-            encounterData.map((encounter, index) => (
-              <div
-                key={index}
-                style={{
-                  cursor: "pointer",
-                  padding: "10px",
-                  borderBottom: "1px solid #ccc",
-                }}
-              >
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Reason
-                </Typography>
-                <Typography variant="body1">{encounter.reason}</Typography>
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Time
-                </Typography>
-                <Typography variant="body1">{encounter.timestamp}</Typography>
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Doctor
-                </Typography>
-                <Typography variant="body1">{encounter.doctorName}</Typography>
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Observation
-                </Typography>
-                <Typography variant="body1">{encounter.observation}</Typography>
-              </div>
-            ))
-          ) : (
-            <Typography variant="body1">
-              No encounters for this patient
+            <Typography variant="h5">Encounter</Typography>
+            <Typography variant="h5" style={{ paddingRight: "130px" }}>
+              Observation
             </Typography>
-          )}
-        </ProfileWrapper>
-        <ProfileWrapper>
-          {observationData.length > 0 ? (
-            observationData.map((observation, index) => (
-              <div
-                key={index}
-                style={{
-                  cursor: "pointer",
-                  padding: "10px",
-                  borderBottom: "1px solid #ccc",
-                }}
-              >
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Observation
-                </Typography>
+          </div>
+
+          <div style={{ display: "flex", paddingTop: "40px" }}>
+            <ProfileWrapper>
+              {conditionData.length > 0 ? (
+                conditionData.map((condition, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                    }}
+                  >
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Condition
+                    </Typography>
+                    <Typography variant="body1">{condition.condition}</Typography>
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Description
+                    </Typography>
+                    <Typography variant="body1">{condition.description}</Typography>
+                  </div>
+                ))
+              ) : (
                 <Typography variant="body1">
-                  {observation.observation}
+                  No conditions for this patient
                 </Typography>
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Time
-                </Typography>
-                <Typography variant="body1">{observation.timestamp}</Typography>
-                <Typography variant="body1" style={{ color: "red" }}>
-                  Doctor
-                </Typography>
+              )}
+            </ProfileWrapper>
+
+            <ProfileWrapper>
+              {encounterData.length > 0 ? (
+                encounterData.map((encounter, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                    }}
+                  >
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Reason
+                    </Typography>
+                    <Typography variant="body1">{encounter.reason}</Typography>
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Time
+                    </Typography>
+                    <Typography variant="body1">{encounter.timestamp}</Typography>
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Doctor
+                    </Typography>
+                    <Typography variant="body1">{encounter.doctorName}</Typography>
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Observation
+                    </Typography>
+                    <Typography variant="body1">{encounter.observation}</Typography>
+                  </div>
+                ))
+              ) : (
                 <Typography variant="body1">
-                  {observation.doctorOrStaffName}
+                  No encounters for this patient
                 </Typography>
-              </div>
-            ))
-          ) : (
-            <Typography variant="body1">
-              No observation for this patient
-            </Typography>
-          )}
-        </ProfileWrapper>
-      </div>
+              )}
+            </ProfileWrapper>
+
+            <ProfileWrapper>
+              {observationData.length > 0 ? (
+                observationData.map((observation, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                    }}
+                  >
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Observation
+                    </Typography>
+                    <Typography variant="body1">
+                      {observation.observation}
+                    </Typography>
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Time
+                    </Typography>
+                    <Typography variant="body1">{observation.timestamp}</Typography>
+                    <Typography variant="body1" style={{ color: "red" }}>
+                      Doctor
+                    </Typography>
+                    <Typography variant="body1">
+                      {observation.doctorOrStaffName}
+                    </Typography>
+                  </div>
+                ))
+              ) : (
+                <Typography variant="body1">
+                  No observation for this patient
+                </Typography>
+              )}
+            </ProfileWrapper>
+          </div>
+        </>
+      )}
     </ProfileContainer>
   );
 }
