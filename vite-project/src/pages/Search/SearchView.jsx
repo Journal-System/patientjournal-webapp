@@ -3,7 +3,7 @@ import {
   SearchContainer,
   SearchContainerWrapper,
   MyInput,
-  MyTable,
+  MyTable,
   TableCell,
   TableHeader,
   TableRow,
@@ -130,11 +130,13 @@ export function Search() {
                 </React.Fragment>
               ))
             ) : (
-              <TableRow>
+              !isSearchLoading && (
+                <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   No patients found
                 </TableCell>
               </TableRow>
+              )
             )}
           </tbody>
         </MyTable>
