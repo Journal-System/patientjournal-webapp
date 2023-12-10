@@ -18,11 +18,13 @@ export function Search() {
   const [name, setName] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [searchData, setSearchData] = useState([]);
-  const [isSearchLoading, setIsSearchLoading] = useState(false);
+  const [loadingPatientsByName, setLoadingPatientsByName] = useState(false);
+  const [loadingPatientsByCondition, setLoadingPatientsByCondition] = useState(false);
   const [searchError, setSearchError] = useState(null);
 
   const handleSearchButtonClick = () => {
-    setIsSearchLoading(true);
+    setLoadingPatientsByName(true);
+    setLoadingPatientsByCondition(true);
 
     getAllPatientsByName(name)
       .then((data) => {
@@ -34,7 +36,7 @@ export function Search() {
         setSearchError(error);
       })
       .finally(() => {
-        setIsSearchLoading(false);
+        setLoadingPatientsByName(false);
       });
 
     getAllPatientsByCondition(name)
@@ -47,7 +49,7 @@ export function Search() {
         setSearchError(error);
       })
       .finally(() => {
-        setIsSearchLoading(false);
+        setLoadingPatientsByCondition(false);
       });
   };
 
@@ -112,13 +114,13 @@ export function Search() {
             </TableHeader>
           </thead>
           <tbody>
-            {isSearchLoading ? (
+            {(loadingPatientsByCondition || loadingPatientsByName) ? (
               <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   Loading...
                 </TableCell>
               </TableRow>
-            ) : searchData.length > 0 ? (
+            ) : searchData.length > 0 (
               searchData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
@@ -129,7 +131,9 @@ export function Search() {
                   </TableRow>
                 </React.Fragment>
               ))
-            ) : (
+            )}
+
+            {(!loadingPatientsByCondition && !loadingPatientsByName) && (
               !isSearchLoading && (
                 <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
