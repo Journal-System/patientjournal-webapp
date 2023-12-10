@@ -134,13 +134,11 @@ export function Search() {
             )}
 
             {(!loadingPatientsByCondition && !loadingPatientsByName) && (
-              !isSearchLoading && (
                 <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   No patients found
                 </TableCell>
               </TableRow>
-              )
             )}
           </tbody>
         </MyTable>
