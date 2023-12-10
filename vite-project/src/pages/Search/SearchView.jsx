@@ -134,11 +134,9 @@ export function Search() {
               </TableRow>
             )}
 
-            {(!loadingPatientsByCondition &&
-              !loadingPatientsByName &&
-              searchPatientsByName.length > 0) ||
+            {!loadingPatientsByCondition &&
             searchPatientsByCondition.length > 0 ? (
-              searchData.map((item, index) => (
+              searchPatientsByCondition.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
                     <TableCell>{item.firstname}</TableCell>
@@ -148,12 +146,17 @@ export function Search() {
                   </TableRow>
                 </React.Fragment>
               ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan="4" style={{ textAlign: "center" }}>
-                  No patients found
-                </TableCell>
-              </TableRow>
+            ) : !loadingPatientsByName && searchPatientsByName.length > 0 (
+              searchPatientsByName.map((item, index) => (
+                <React.Fragment key={index}>
+                  <TableRow>
+                    <TableCell>{item.firstname}</TableCell>
+                    <TableCell>{item.phone}</TableCell>
+                    <TableCell>{item.email}</TableCell>
+                    <TableCell>{item.address}</TableCell>
+                  </TableRow>
+                </React.Fragment>
+              ))
             )}
           </tbody>
         </MyTable>
