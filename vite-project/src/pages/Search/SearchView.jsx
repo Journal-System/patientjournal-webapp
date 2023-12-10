@@ -120,8 +120,7 @@ export function Search() {
                   Loading...
                 </TableCell>
               </TableRow>
-            ) : searchData.length > 0 (
-              searchData.map((item, index) => (
+            ) : searchData.length > 0 && searchData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
                     <TableCell>{item.firstname}</TableCell>
@@ -130,8 +129,7 @@ export function Search() {
                     <TableCell>{item.address}</TableCell>
                   </TableRow>
                 </React.Fragment>
-              ))
-            )}
+              ))}
 
             {(!loadingPatientsByCondition && !loadingPatientsByName) && (
                 <TableRow>
