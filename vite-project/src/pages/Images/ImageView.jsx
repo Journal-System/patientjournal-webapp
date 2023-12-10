@@ -23,6 +23,7 @@ export function Images() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [text, setText] = useState("");
   const [isTextInput, setIsTextInput] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   const canvasRef = useRef(null);
   const drawingRef = useRef(false);
@@ -60,6 +61,7 @@ export function Images() {
   };
 
   const handleFetchImage = async () => {
+    setIsImageLoading(true)
     try {
       const dataUrl = await getImageById(imageId);
       setImageData(dataUrl);
@@ -67,6 +69,8 @@ export function Images() {
     } catch (error) {
       console.error(error);
       // Handle error (e.g., display an error message to the user)
+    } finally {
+      setIsImageLoading(false);
     }
   };
 
@@ -75,6 +79,7 @@ export function Images() {
   };
 
   const handleUpload = async () => {
+    setIsImageLoading(true);
     try {
       if (selectedFile) {
         await uploadImage(selectedFile);
@@ -86,6 +91,8 @@ export function Images() {
       }
     } catch (error) {
       console.error("Image upload failed:", error.message);
+    } finally {
+      setIsImageLoading(false);
     }
   };
 
@@ -161,7 +168,7 @@ export function Images() {
 
   return (
     <ImagesMainContainer>
-      {!isAuthorized && (
+      {(!isAuthorized && isImageLoading) && (
         <div
           style={{ fontSize: "100px", textAlign: "center", marginTop: "200px" }}
         >

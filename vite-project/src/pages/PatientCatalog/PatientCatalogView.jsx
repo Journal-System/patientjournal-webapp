@@ -45,7 +45,7 @@ export function Patients() {
         </div>
       )}
 
-      {(!isLoading && !isError && isAuthorized) ? (
+      {(!isLoading && !isError) && (
         <>
           <Typography variant="h2" style={{ marginBottom: "20px" }}>
             Patients Information Directory
@@ -91,7 +91,10 @@ export function Patients() {
             </MyTable>
           </ContainerWrapper>
         </>
-      ) : (
+      )}
+      
+      {(!isAuthorized && !isLoading) && (
+        <>
         <div
           style={{ fontSize: "90px", textAlign: "center", marginTop: "20px" }}
         >
@@ -99,6 +102,7 @@ export function Patients() {
           <br />
           Please <a href="/">click here</a> to return to the homepage
         </div>
+        </>
       )}
     </PatientsContainer>
   );

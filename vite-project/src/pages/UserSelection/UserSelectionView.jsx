@@ -28,45 +28,57 @@ export function UserSelection() {
     }
   }, []);
 
+  if (!isAuthorized) {
+    return (
+      <MessageContainer>
+        {isLoading && <div>Loading...</div>}
+
+        {isError && (
+          <div>Error: {error?.message || "Something went wrong"}</div>
+        )}
+        
+        {!isLoading && (
+          <>
+            <Typography variant="h4">Start a Message</Typography>
+            <Typography variant="subtitle1" style={{ color: "red" }}>
+              Click on a patient member to begin a conversation.
+            </Typography>
+            <div style={{ display: "flex", paddingTop: "40px" }}>
+              <PatientWrapper>
+                <Typography variant="h4">All patients</Typography>
+
+                {patientData.length > 0 ? (
+                  patientData.map((patient, index) => (
+                    <div
+                      key={index}
+                      onClick={() => selectUser(patient.email, patient.id)}
+                      style={{
+                        cursor: "pointer",
+                        padding: "10px",
+                        borderBottom: "1px solid #ccc",
+                      }}
+                    >
+                      <SelectedUser>{patient.fullname}</SelectedUser>
+                    </div>
+                  ))
+                ) : (
+                  <div>No patient found</div>
+                )}
+              </PatientWrapper>
+            </div>
+          </>
+        )}
+      </MessageContainer>
+    );
+  }
+
   return (
     <MessageContainer>
       {isLoading && <div>Loading...</div>}
 
       {isError && <div>Error: {error?.message || "Something went wrong"}</div>}
-
-      {!isAuthorized && (
-        <>
-          <Typography variant="h4">Start a Message</Typography>
-          <Typography variant="subtitle1" style={{ color: "red" }}>
-            Click on a patient member to begin a conversation.
-          </Typography>
-          <div style={{ display: "flex", paddingTop: "40px" }}>
-            <PatientWrapper>
-              <Typography variant="h4">All patients</Typography>
-
-              {patientData.length > 0 ? (
-                patientData.map((patient, index) => (
-                  <div
-                    key={index}
-                    onClick={() => selectUser(patient.email, patient.id)}
-                    style={{
-                      cursor: "pointer",
-                      padding: "10px",
-                      borderBottom: "1px solid #ccc",
-                    }}
-                  >
-                    <SelectedUser>{patient.fullname}</SelectedUser>
-                  </div>
-                ))
-              ) : (
-                <div>No patient found</div>
-              )}
-            </PatientWrapper>
-          </div>
-        </>
-      )}
-
-      {isAuthorized && (
+      
+      {!isLoading && (
         <div
           style={{
             flexDirection: "column",

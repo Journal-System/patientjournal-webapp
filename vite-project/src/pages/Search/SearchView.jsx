@@ -58,7 +58,7 @@ export function Search() {
     }
   }, []);
 
-  if (!isAuthorized) {
+  if (!isAuthorized && isSearchLoading) {
     return (
       <SearchContainer>
         <div

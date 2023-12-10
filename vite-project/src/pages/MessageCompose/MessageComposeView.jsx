@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MessagesContainer, MessagesWrapper } from "./MessageComposeStyles";
-import { Typography, TextField, Button } from "@mui/material";
+import { Typography, TextField, Button, CircularProgress } from "@mui/material";
 import {
   getMessagesBySenderAndReceiver,
   getMessagesByReceiverAndSender,
@@ -13,6 +13,7 @@ export function Messages() {
   const senderEmail = localStorage.getItem("userEmail");
   const senderId = localStorage.getItem("userId");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [allMessages, setAllMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -20,6 +21,7 @@ export function Messages() {
     const userEmail = localStorage.getItem("userEmail");
     if (userEmail) {
       setIsLoggedIn(true);
+      setLoading(true);
 
       // Fetch messages for sender and receiver
       Promise.all([
@@ -43,8 +45,11 @@ export function Messages() {
           if (error.message === "No messages found") {
             console.error("No messages found");
           } else {
-            console.error("Error fetching messages d:", error.message);
+            console.error("Error fetching messages:", error.message);
           }
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }, [senderEmail, sentToEmail]);
@@ -62,7 +67,7 @@ export function Messages() {
     setNewMessage("");
   };
 
-  if (!isLoggedIn) {
+  if (!isLoggedIn && loading) {
     return (
       <MessagesContainer>
         <div
@@ -79,43 +84,49 @@ export function Messages() {
       <Typography variant="h4" style={{ padding: "20px" }}>
         Messages
       </Typography>
-      <MessagesWrapper>
-        <ul>
-          {allMessages.map((message, index) => {
-            return (
-              <li key={index}>
-                {message.senderID == senderId ? (
-                  <span style={{ marginLeft: "1000px" }}>
-                    {message.content}
-                  </span>
-                ) : (
-                  <span style={{ marginRight: "1000px" }}>
-                    {message.content}
-                  </span>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-        <div style={{ marginTop: "20px" }}>
-          <TextField
-            label="Type your message"
-            variant="outlined"
-            multiline
-            rows={3}
-            fullWidth
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSendMessage}
-          >
-            Send
-          </Button>
-        </div>
-      </MessagesWrapper>
+
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <MessagesWrapper>
+          <ul>
+            {allMessages.map((message, index) => {
+              return (
+                <li key={index}>
+                  {message.senderID == senderId ? (
+                    <span style={{ marginLeft: "1000px" }}>
+                      {message.content}
+                    </span>
+                  ) : (
+                    <span style={{ marginRight: "1000px" }}>
+                      {message.content}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+
+          <div style={{ marginTop: "20px" }}>
+            <TextField
+              label="Type your message"
+              variant="outlined"
+              multiline
+              rows={3}
+              fullWidth
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSendMessage}
+            >
+              Send
+            </Button>
+          </div>
+        </MessagesWrapper>
+      )}
     </MessagesContainer>
   );
 }
