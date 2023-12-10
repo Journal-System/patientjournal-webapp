@@ -17,7 +17,10 @@ import {
 export function Search() {
   const [name, setName] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
-  const [searchData, setSearchData] = useState([]);
+  const [searchPatientsByCondition, setSearchPatientsByCondition] = useState(
+    []
+  );
+  const [searchPatientsByName, setSearchPatientsByName] = useState([]);
   const [loadingPatientsByName, setLoadingPatientsByName] = useState(false);
   const [loadingPatientsByCondition, setLoadingPatientsByCondition] =
     useState(false);
@@ -30,7 +33,7 @@ export function Search() {
     getAllPatientsByName(name)
       .then((data) => {
         console.log("Search successful with data:", data);
-        setSearchData(data);
+        setSearchPatientsByName(data);
       })
       .catch((error) => {
         console.error("Search error: ", error.message);
@@ -43,7 +46,7 @@ export function Search() {
     getAllPatientsByCondition(name)
       .then((data) => {
         console.log("Search successful with data:", data);
-        setSearchData(data);
+        setSearchPatientsByCondition(data);
       })
       .catch((error) => {
         console.error("Search error: ", error.message);
@@ -115,7 +118,15 @@ export function Search() {
             </TableHeader>
           </thead>
           <tbody>
-            {(loadingPatientsByCondition || loadingPatientsByName) && (
+            {(!loadingPatientsByCondition || !loadingPatientsByName) && (
+              <TableRow>
+                <TableCell colSpan="4" style={{ textAlign: "center" }}>
+                  Try searching for a name or condition to view results
+                </TableCell>
+              </TableRow>
+            )}
+
+            {loadingPatientsByCondition && loadingPatientsByName && (
               <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   Loading...
@@ -123,8 +134,10 @@ export function Search() {
               </TableRow>
             )}
 
-            {(!loadingPatientsByCondition || !loadingPatientsByName) && 
-            searchData.length > 0 ? (
+            {(!loadingPatientsByCondition &&
+              !loadingPatientsByName &&
+              searchPatientsByName.length > 0) ||
+            searchPatientsByCondition.length > 0 ? (
               searchData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
