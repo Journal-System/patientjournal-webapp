@@ -60,7 +60,7 @@ export function Search() {
     }
   }, []);
 
-  if (!isAuthorized && isSearchLoading) {
+  if (!isAuthorized && loadingPatientsByCondition && loadingPatientsByName) {
     return (
       <SearchContainer>
         <div
