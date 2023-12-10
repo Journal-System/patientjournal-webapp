@@ -115,13 +115,16 @@ export function Search() {
             </TableHeader>
           </thead>
           <tbody>
-            {loadingPatientsByCondition || loadingPatientsByName ? (
+            {(loadingPatientsByCondition || loadingPatientsByName) && (
               <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   Loading...
                 </TableCell>
               </TableRow>
-            ) : searchData.length > 0 ? (
+            )}
+            
+            {(!loadingPatientsByCondition && !loadingPatientsByName) && 
+            searchData.length > 0 ? (
               searchData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
