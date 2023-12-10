@@ -118,14 +118,6 @@ export function Search() {
             </TableHeader>
           </thead>
           <tbody>
-            {(!loadingPatientsByCondition || !loadingPatientsByName) && (
-              <TableRow>
-                <TableCell colSpan="4" style={{ textAlign: "center" }}>
-                  Try searching for a name or condition to view results
-                </TableCell>
-              </TableRow>
-            )}
-
             {loadingPatientsByCondition && loadingPatientsByName && (
               <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
