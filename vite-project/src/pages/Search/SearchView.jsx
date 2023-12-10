@@ -19,7 +19,8 @@ export function Search() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [searchData, setSearchData] = useState([]);
   const [loadingPatientsByName, setLoadingPatientsByName] = useState(false);
-  const [loadingPatientsByCondition, setLoadingPatientsByCondition] = useState(false);
+  const [loadingPatientsByCondition, setLoadingPatientsByCondition] =
+    useState(false);
   const [searchError, setSearchError] = useState(null);
 
   const handleSearchButtonClick = () => {
@@ -114,13 +115,14 @@ export function Search() {
             </TableHeader>
           </thead>
           <tbody>
-            {(loadingPatientsByCondition || loadingPatientsByName) ? (
+            {loadingPatientsByCondition || loadingPatientsByName ? (
               <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   Loading...
                 </TableCell>
               </TableRow>
-            ) : searchData.length > 0 && searchData.map((item, index) => (
+            ) : searchData.length > 0 ? (
+              searchData.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
                     <TableCell>{item.firstname}</TableCell>
@@ -129,10 +131,9 @@ export function Search() {
                     <TableCell>{item.address}</TableCell>
                   </TableRow>
                 </React.Fragment>
-              ))}
-
-            {(!loadingPatientsByCondition && !loadingPatientsByName) && (
-                <TableRow>
+              ))
+            ) : (
+              <TableRow>
                 <TableCell colSpan="4" style={{ textAlign: "center" }}>
                   No patients found
                 </TableCell>
