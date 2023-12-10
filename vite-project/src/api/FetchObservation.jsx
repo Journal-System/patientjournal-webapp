@@ -4,7 +4,7 @@ export async function getAllObservationsForPatient(id) {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8082/observation/getAll/${id}`,
+      url: `https://eoc-service.app.cloud.cbh.kth.se/observation/getAll/${id}`,
     };
 
     const response = await axios.request(options);
@@ -27,7 +27,7 @@ export function addOneObservation(observation, patientId, staffOrDoctorId) {
     staffOrDoctorId: staffOrDoctorId.toString(),
   });
 
-  return fetch(`http://localhost:8082/observation/add?${queryParams.toString()}`, {
+  return fetch(`https://eoc-service.app.cloud.cbh.kth.se/observation/add?${queryParams.toString()}`, {
     method: "POST",
   })
     .then((response) => {

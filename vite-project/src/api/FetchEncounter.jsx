@@ -4,7 +4,7 @@ export async function getAllEncountersForPatient(id) {
   try {
     const options = {
       method: "GET",
-      url: `http://localhost:8082/encounter/getAll/${id}`,
+      url: `https://eoc-service.app.cloud.cbh.kth.se/encounter/getAll/${id}`,
     };
 
     const response = await axios.request(options);

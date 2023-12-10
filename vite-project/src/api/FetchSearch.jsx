@@ -4,7 +4,7 @@ export async function getAllPatientsByName(name) {
     try {
         const options = {
             method: "GET",
-            url: `http://localhost:8085/v1/patients/name/${name}`,
+            url: `https://search-service.app.cloud.cbh.kth.se/v1/patients/name/${name}`,
         };
 
         const response = await axios.request(options);
@@ -24,7 +24,7 @@ export async function getAllPatientsByCondition(condition) {
     try {
         const options = {
             method: "GET",
-            url: `http://localhost:8085/v1/patients/condition/${condition}`,
+            url: `https://search-service.app.cloud.cbh.kth.se/v1/patients/condition/${condition}`,
         };
 
         const response = await axios.request(options);
