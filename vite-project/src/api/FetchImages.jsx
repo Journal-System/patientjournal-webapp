@@ -4,7 +4,7 @@ export async function getImageById(id) {
     try {
       const options = {
         method: "GET",
-        url: `http://localhost:8084/download/${id}`,
+        url: `https://image-servie.app.cloud.cbh.kth.se/download/${id}`,
         responseType: "arraybuffer", // Set response type to arraybuffer, image is stored as BLOB thats why
       };
   
@@ -35,7 +35,7 @@ export async function uploadImage(imageFile) {
     const formData = new FormData();
     formData.append('image', imageFile);
 
-    const response = await axios.post('http://localhost:8084/upload', formData, {
+    const response = await axios.post('https://image-servie.app.cloud.cbh.kth.se/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -54,7 +54,7 @@ export async function saveImagewithId(id, imageFile) {
       const formData = new FormData();
       formData.append('image', imageFile);
   
-      const response = await axios.post(`http://localhost:8084/save/${id}`, formData, {
+      const response = await axios.post(`https://image-servie.app.cloud.cbh.kth.se/save/${id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
