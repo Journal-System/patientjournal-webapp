@@ -28,107 +28,103 @@ export function UserSelection() {
     }
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!isAuthorized) {
-    return (
-      <MessageContainer>
-        <Typography variant="h4">Start a Message</Typography>
-        <Typography variant="subtitle1" style={{ color: "red" }}>
-          Click on a patient member to begin a conversation.
-        </Typography>
-        <div style={{ display: "flex", paddingTop: "40px" }}>
-          <PatientWrapper>
-            <Typography variant="h4">All patients</Typography>
-
-            {patientData.length > 0 ? (
-              patientData.map((patient, index) => (
-                <div
-                  key={index}
-                  onClick={() => selectUser(patient.email, patient.id)}
-                  style={{
-                    cursor: "pointer",
-                    padding: "10px",
-                    borderBottom: "1px solid #ccc",
-                  }}
-                >
-                  <SelectedUser>{patient.fullname}</SelectedUser>
-                </div>
-              ))
-            ) : (
-              <div>No patient found</div>
-            )}
-          </PatientWrapper>
-        </div>
-      </MessageContainer>
-    );
-  }
-
   return (
     <MessageContainer>
-      <div
-        style={{
-          flexDirection: "column",
-          alignItems: "center",
-          paddingBottom: "10px",
-        }}
-      >
-        <Typography variant="h4">Start a Message</Typography>
-        <Typography variant="subtitle1" style={{ color: "red" }}>
-          Click on a doctor or staff member to begin a conversation.
-        </Typography>
-        <div style={{ display: "flex", paddingTop: "40px" }}>
-          <DoctorWrapper>
-            <Typography variant="h4">All doctors</Typography>
+      {isLoading && <div>Loading...</div>}
 
-            {doctorData.length > 0 ? (
-              doctorData.map((doctor, index) => (
-                <div
-                  key={index}
-                  onClick={() => selectUser(doctor.email, doctor.id)}
-                  style={{
-                    cursor: "pointer",
-                    padding: "10px",
-                    borderBottom: "1px solid #ccc",
-                  }}
-                >
-                  <SelectedUser>{doctor.fullname}</SelectedUser>
-                </div>
-              ))
-            ) : (
-              <div>No doctor found</div>
-            )}
-          </DoctorWrapper>
+      {isError && <div>Error: {error?.message || "Something went wrong"}</div>}
 
-          <StaffWrapper>
-            <Typography variant="h4">All staffs</Typography>
+      {!isAuthorized && (
+        <>
+          <Typography variant="h4">Start a Message</Typography>
+          <Typography variant="subtitle1" style={{ color: "red" }}>
+            Click on a patient member to begin a conversation.
+          </Typography>
+          <div style={{ display: "flex", paddingTop: "40px" }}>
+            <PatientWrapper>
+              <Typography variant="h4">All patients</Typography>
 
-            {staffData.length > 0 ? (
-              staffData.map((staff, index) => (
-                <div
-                  key={index}
-                  onClick={() => selectUser(staff.email, staff.id)}
-                  style={{
-                    cursor: "pointer",
-                    padding: "10px",
-                    borderBottom: "1px solid #ccc",
-                  }}
-                >
-                  <SelectedUser>{staff.fullname}</SelectedUser>
-                </div>
-              ))
-            ) : (
-              <div>No staff found</div>
-            )}
-          </StaffWrapper>
+              {patientData.length > 0 ? (
+                patientData.map((patient, index) => (
+                  <div
+                    key={index}
+                    onClick={() => selectUser(patient.email, patient.id)}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                    }}
+                  >
+                    <SelectedUser>{patient.fullname}</SelectedUser>
+                  </div>
+                ))
+              ) : (
+                <div>No patient found</div>
+              )}
+            </PatientWrapper>
+          </div>
+        </>
+      )}
+
+      {isAuthorized && (
+        <div
+          style={{
+            flexDirection: "column",
+            alignItems: "center",
+            paddingBottom: "10px",
+          }}
+        >
+          <Typography variant="h4">Start a Message</Typography>
+          <Typography variant="subtitle1" style={{ color: "red" }}>
+            Click on a doctor or staff member to begin a conversation.
+          </Typography>
+          <div style={{ display: "flex", paddingTop: "40px" }}>
+            <DoctorWrapper>
+              <Typography variant="h4">All doctors</Typography>
+
+              {doctorData.length > 0 ? (
+                doctorData.map((doctor, index) => (
+                  <div
+                    key={index}
+                    onClick={() => selectUser(doctor.email, doctor.id)}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                    }}
+                  >
+                    <SelectedUser>{doctor.fullname}</SelectedUser>
+                  </div>
+                ))
+              ) : (
+                <div>No doctor found</div>
+              )}
+            </DoctorWrapper>
+
+            <StaffWrapper>
+              <Typography variant="h4">All staffs</Typography>
+
+              {staffData.length > 0 ? (
+                staffData.map((staff, index) => (
+                  <div
+                    key={index}
+                    onClick={() => selectUser(staff.email, staff.id)}
+                    style={{
+                      cursor: "pointer",
+                      padding: "10px",
+                      borderBottom: "1px solid #ccc",
+                    }}
+                  >
+                    <SelectedUser>{staff.fullname}</SelectedUser>
+                  </div>
+                ))
+              ) : (
+                <div>No staff found</div>
+              )}
+            </StaffWrapper>
+          </div>
         </div>
-      </div>
+      )}
     </MessageContainer>
   );
 }
