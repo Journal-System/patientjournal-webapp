@@ -146,7 +146,7 @@ export function Search() {
                   </TableRow>
                 </React.Fragment>
               ))
-            ) : !loadingPatientsByName && searchPatientsByName.length > 0 (
+            ) : !loadingPatientsByName && searchPatientsByName.length > 0 &&
               searchPatientsByName.map((item, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
@@ -156,8 +156,7 @@ export function Search() {
                     <TableCell>{item.address}</TableCell>
                   </TableRow>
                 </React.Fragment>
-              ))
-            )}
+              ))}
           </tbody>
         </MyTable>
       </SearchContainerWrapper>
