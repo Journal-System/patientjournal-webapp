@@ -10,7 +10,7 @@ import { Profile } from "../pages/Profile/ProfileView";
 import { ObservationList } from "../pages/Observation/ObservationList";
 import { ObservationForm } from "../pages/Observation/ObservationForm";
 import { Search } from "../pages/Search/SearchView";
-import { Images } from "../pages/Images/ImageView"
+import { Images } from "../pages/Images/ImageView";
 
 export default function AppRoutes() {
   return (
@@ -147,7 +147,6 @@ export default function AppRoutes() {
             </>
           }
         />
-
       </Routes>
     </HelmetProvider>
   );

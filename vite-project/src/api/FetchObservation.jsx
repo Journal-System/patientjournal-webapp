@@ -27,9 +27,12 @@ export function addOneObservation(observation, patientId, staffOrDoctorId) {
     staffOrDoctorId: staffOrDoctorId.toString(),
   });
 
-  return fetch(`https://eoc-service.app.cloud.cbh.kth.se/observation/add?${queryParams.toString()}`, {
-    method: "POST",
-  })
+  return fetch(
+    `https://eoc-service.app.cloud.cbh.kth.se/observation/add?${queryParams.toString()}`,
+    {
+      method: "POST",
+    }
+  )
     .then((response) => {
       if (response.ok) {
         return response.json();

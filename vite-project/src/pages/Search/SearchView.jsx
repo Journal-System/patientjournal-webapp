@@ -9,7 +9,10 @@ import {
   TableRow,
 } from "./SearchStyles";
 import { Typography } from "@mui/material";
-import { getAllPatientsByName, getAllPatientsByCondition } from "../../api/FetchSearch";
+import {
+  getAllPatientsByName,
+  getAllPatientsByCondition,
+} from "../../api/FetchSearch";
 
 export function Search() {
   const [name, setName] = useState("");
@@ -34,7 +37,7 @@ export function Search() {
         setIsSearchLoading(false);
       });
 
-      getAllPatientsByCondition(name)
+    getAllPatientsByCondition(name)
       .then((data) => {
         console.log("Search successful with data:", data);
         setSearchData(data);
@@ -78,27 +81,27 @@ export function Search() {
         Search for patients using their name or medical condition
       </Typography>
       <SearchContainerWrapper>
-          <MyInput
-            type="text"
-            id="myInput"
-            placeholder="Name or Condition"
-            onChange={(event) => setName(event.target.value)}
-          />
-          <button
-            style={{
-              padding: "14px 15px 15px 15px",
-              fontSize: "16px",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              transition: "background-color 0.3s",
-              marginRight: "60px",
-            }}
-            onClick={handleSearchButtonClick}
-          >
-            Search
-          </button>
+        <MyInput
+          type="text"
+          id="myInput"
+          placeholder="Name or Condition"
+          onChange={(event) => setName(event.target.value)}
+        />
+        <button
+          style={{
+            padding: "14px 15px 15px 15px",
+            fontSize: "16px",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            transition: "background-color 0.3s",
+            marginRight: "60px",
+          }}
+          onClick={handleSearchButtonClick}
+        >
+          Search
+        </button>
         <MyTable id="myTable">
           <thead>
             <TableHeader className="header">

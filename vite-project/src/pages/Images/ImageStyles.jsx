@@ -1,5 +1,4 @@
 import { styled } from "@mui/system";
-import { Box } from "@mui/material";
 
 export const ImagesMainContainer = styled("div")`
   grid-area: main;
@@ -14,8 +13,8 @@ export const ImagesMainContainer = styled("div")`
 `;
 
 export const CanvasContainer = styled("div")`
-maxWidth: 100%;
-width: 'auto';
-maxHeight: 100%;
-height: 'auto';
+  maxwidth: 100%;
+  width: "auto";
+  maxheight: 100%;
+  height: "auto";
 `;

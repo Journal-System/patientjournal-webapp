@@ -142,10 +142,10 @@ export default function NavBar() {
                       >
                         Search
                       </MenuItem>
-                      <MenuItem 
+                      <MenuItem
                         onClick={handleClose}
                         component={Link}
-                        to="/Images" 
+                        to="/Images"
                       >
                         Image handling
                       </MenuItem>
