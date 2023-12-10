@@ -3,7 +3,7 @@ import {
   SearchContainer,
   SearchContainerWrapper,
   MyInput,
-  MyTable,
+  MyTable,
   TableCell,
   TableHeader,
   TableRow,
