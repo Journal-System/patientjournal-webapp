@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getAllUsers } from "../../api/FetchUsers";
+import { getAllPatients } from "../../api/FetchPatients";
 
 export function usePatientLogic() {
   const {
@@ -7,7 +7,7 @@ export function usePatientLogic() {
     isLoading,
     isError,
     error,
-  } = useQuery("users", getAllUsers);
+  } = useQuery("users", getAllPatients);
 
   return {
     isLoading,

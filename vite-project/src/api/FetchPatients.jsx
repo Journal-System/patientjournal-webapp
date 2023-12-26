@@ -40,3 +40,27 @@ export async function getOnePatient(id) {
     }
   }
 }
+
+export function postUser(newUser, onSuccess, onError) {
+  fetch("https://user-service.app.cloud.cbh.kth.se/patient/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newUser),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("This email is already being used");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (onSuccess) {
+        onSuccess(data);
+      }
+    })
+    .catch((error) => {
+      if (onError) {
+        onError(error);
+      }
+    });
+}

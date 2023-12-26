@@ -25,11 +25,11 @@ export function Login() {
 
     authenticate(email, password)
       .then((data) => {
-        console.log("Login successful with data:", data);
+        console.log("The access token: ", data);
         localStorage.setItem("userEmail", email);
         localStorage.setItem("userId", data.id);
         localStorage.setItem("userRole", data.role);
-
+        localStorage.setItem("access_token", data)
         setSuccessMessage("Login successful! Redirecting...");
         setTimeout(() => {
           window.location.href = "/";
