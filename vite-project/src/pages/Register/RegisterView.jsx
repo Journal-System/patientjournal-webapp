@@ -9,7 +9,7 @@ import {
   ErrorText,
   SuccessText,
 } from "./RegisterStyles";
-import { postUser } from "../../api/FetchUsers";
+import { postUser } from "../../api/FetchPatients";
 
 export function Register() {
   const [email, setEmail] = useState("");
