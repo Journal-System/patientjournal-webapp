@@ -12,7 +12,7 @@ import { useDoctorLogic } from "./UserSelectionLogic";
 export function UserSelection() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const { isLoading, doctorData, staffData, patientData, isError, error } =
-    useDoctorLogic();
+    useDoctorLogic(localStorage.getItem("access_token"));
 
   const selectUser = (email, id) => {
     localStorage.setItem("selectedUserEmail", email);
