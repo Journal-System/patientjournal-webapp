@@ -1,8 +1,11 @@
-export function getMessagesBySenderAndReceiver(senderId, receiverId) {
+export function getMessagesBySenderAndReceiver(senderId, receiverId, access_token) {
   const url = `https://message-service.app.cloud.cbh.kth.se/message/getMessagesBySenderAndReceiver?senderId=${senderId}&receiverId=${receiverId}`;
 
   return fetch(url, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
   })
     .then((response) => {
       if (response.ok) {
@@ -18,11 +21,14 @@ export function getMessagesBySenderAndReceiver(senderId, receiverId) {
     });
 }
 
-export function getMessagesByReceiverAndSender(receiverId, senderId) {
+export function getMessagesByReceiverAndSender(receiverId, senderId, access_token) {
   const url = `https://message-service.app.cloud.cbh.kth.se/message/getMessagesBySenderAndReceiver?senderId=${receiverId}&receiverId=${senderId}`;
 
   return fetch(url, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
   })
     .then((response) => {
       if (response.ok) {
@@ -38,10 +44,10 @@ export function getMessagesByReceiverAndSender(receiverId, senderId) {
     });
 }
 
-export function addMessage(newMessage) {
+export function addMessage(newMessage, access_token) {
   fetch("https://message-service.app.cloud.cbh.kth.se/message/addMessage", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${access_token}` },
     body: JSON.stringify(newMessage),
   }).then((response) => {
     if (!response.ok) {

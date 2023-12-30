@@ -25,8 +25,8 @@ export function Messages() {
 
       // Fetch messages for sender and receiver
       Promise.all([
-        getMessagesBySenderAndReceiver(senderId, sentToId),
-        getMessagesByReceiverAndSender(sentToId, senderId),
+        getMessagesBySenderAndReceiver(senderId, sentToId, localStorage.getItem("access_token")),
+        getMessagesByReceiverAndSender(sentToId, senderId, localStorage.getItem("access_token")),
       ])
         .then(([senderMessages, receiverMessages]) => {
           // Ensure both senderMessages and receiverMessages are arrays
@@ -61,7 +61,7 @@ export function Messages() {
       content: newMessage,
     };
 
-    addMessage(newMessageObject);
+    addMessage(newMessageObject. localStorage.getItem("access_token"));
 
     setAllMessages([...allMessages, newMessageObject]);
     setNewMessage("");
