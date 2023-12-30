@@ -9,28 +9,34 @@ export function useDoctorLogic(access_token) {
     isLoading: isLoadingDoctors,
     isError: isErrorDoctors,
     error: errorDoctors,
-  } = useQuery("doctors", getAllDoctors(access_token));
+  } = useQuery(["doctors", access_token], () => getAllDoctors(access_token));
 
   const {
     data: staffData,
     isLoading: isLoadingStaffs,
     isError: isErrorStaffs,
     error: errorStaffs,
-  } = useQuery("staffs", getAllStaffs(access_token));
+  } = useQuery(["staffs", access_token], () => getAllStaffs(access_token));
 
   const {
     data: patientData,
     isLoading: isLoadingPatients,
     isError: isErrorPatients,
     error: errorPatients,
-  } = useQuery("patients", getAllPatients(access_token));
+  } = useQuery(["patients", access_token], () => getAllPatients(access_token));
 
   return {
-    isLoading: isLoadingDoctors || isLoadingStaffs || isLoadingPatients,
+    isLoadingDoctors: isLoadingDoctors,
+    isLoadingStaffs: isLoadingStaffs,
+    isLoadingPatients: isLoadingPatients,
     doctorData: doctorData,
     staffData: staffData,
     patientData: patientData,
-    isError: isErrorDoctors || isErrorStaffs || isErrorPatients,
-    error: errorDoctors || errorStaffs || errorPatients,
+    isErrorDoctors: isErrorDoctors,
+    isErrorStaffs: isErrorStaffs, 
+    isErrorPatients: isErrorPatients,
+    errorDoctors: errorDoctors,
+    errorStaffs: errorStaffs,
+    errorPatients: errorPatients,
   };
 }

@@ -12,7 +12,7 @@ export function authenticate(email, password) {
   )
     .then((response) => {
       if (response.ok) {
-        return response.text();
+        return response.json();
       } else if (response.status === 401) {
         throw new Error("Unauthorized");
       } else {

@@ -1,10 +1,13 @@
 import axios from "axios";
 
-export async function getAllEncountersForPatient(id) {
+export async function getAllEncountersForPatient(id, access_token) {
   try {
     const options = {
       method: "GET",
       url: `https://eoc-service.app.cloud.cbh.kth.se/encounter/getAll/${id}`,
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
     };
 
     const response = await axios.request(options);

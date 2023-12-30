@@ -11,8 +11,20 @@ import { useDoctorLogic } from "./UserSelectionLogic";
 
 export function UserSelection() {
   const [isAuthorized, setIsAuthorized] = useState(false);
-  const { isLoading, doctorData, staffData, patientData, isError, error } =
-    useDoctorLogic(localStorage.getItem("access_token"));
+  const {
+    isLoadingDoctors,
+    isLoadingPatients,
+    isLoadingStaffs,
+    doctorData,
+    staffData,
+    patientData,
+    isErrorDoctors,
+    isErrorPatients,
+    isErrorStaffs,
+    errorDoctors,
+    errorPatients,
+    errorStaffs,
+  } = useDoctorLogic(localStorage.getItem("access_token"));
 
   const selectUser = (email, id) => {
     localStorage.setItem("selectedUserEmail", email);
@@ -31,13 +43,13 @@ export function UserSelection() {
   if (!isAuthorized) {
     return (
       <MessageContainer>
-        {isLoading && <div>Loading...</div>}
+        {isLoadingPatients && <div>Loading...</div>}
 
-        {isError && (
-          <div>Error: {error?.message || "Something went wrong"}</div>
+        {isErrorPatients && (
+          <div>Error: {errorPatients?.message || "Something went wrong"}</div>
         )}
-        
-        {!isLoading && (
+
+        {!isLoadingPatients && (
           <>
             <Typography variant="h4">Start a Message</Typography>
             <Typography variant="subtitle1" style={{ color: "red" }}>
@@ -47,7 +59,7 @@ export function UserSelection() {
               <PatientWrapper>
                 <Typography variant="h4">All patients</Typography>
 
-                {patientData.length > 0 ? (
+                {patientData?.length > 0 ? (
                   patientData.map((patient, index) => (
                     <div
                       key={index}
@@ -74,11 +86,18 @@ export function UserSelection() {
 
   return (
     <MessageContainer>
-      {isLoading && <div>Loading...</div>}
+      {isLoadingDoctors && isLoadingStaffs && <div>Loading...</div>}
 
-      {isError && <div>Error: {error?.message || "Something went wrong"}</div>}
-      
-      {!isLoading && (
+      {(isErrorDoctors || isErrorStaffs) && (
+        <div>
+          Error:{" "}
+          {errorDoctors?.message ||
+            errorStaffs?.message ||
+            "Something went wrong"}
+        </div>
+      )}
+
+      {!isLoadingDoctors && !isLoadingStaffs && (
         <div
           style={{
             flexDirection: "column",
@@ -94,7 +113,7 @@ export function UserSelection() {
             <DoctorWrapper>
               <Typography variant="h4">All doctors</Typography>
 
-              {doctorData.length > 0 ? (
+              {doctorData?.length > 0 ? (
                 doctorData.map((doctor, index) => (
                   <div
                     key={index}
@@ -116,7 +135,7 @@ export function UserSelection() {
             <StaffWrapper>
               <Typography variant="h4">All staffs</Typography>
 
-              {staffData.length > 0 ? (
+              {staffData?.length > 0 ? (
                 staffData.map((staff, index) => (
                   <div
                     key={index}

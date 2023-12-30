@@ -18,7 +18,7 @@ export function useProfileLogic(patientId) {
     isError: isConditionError,
     error: conditionError,
   } = useQuery(["condition", patientId], () =>
-    getAllConditionsForPatient(patientId)
+    getAllConditionsForPatient(patientId, localStorage.getItem("access_token"))
   );
 
   const {
@@ -27,7 +27,7 @@ export function useProfileLogic(patientId) {
     isError: isEncounterError,
     error: encounterError,
   } = useQuery(["encounter", patientId], () =>
-    getAllEncountersForPatient(patientId)
+    getAllEncountersForPatient(patientId, localStorage.getItem("access_token"))
   );
 
   const {
@@ -36,7 +36,7 @@ export function useProfileLogic(patientId) {
     isError: isObservationError,
     error: observationError,
   } = useQuery(["observation", patientId], () =>
-    getAllObservationsForPatient(patientId)
+    getAllObservationsForPatient(patientId, localStorage.getItem("access_token"))
   );
 
   return {

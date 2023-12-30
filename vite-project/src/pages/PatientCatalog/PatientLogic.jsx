@@ -7,7 +7,7 @@ export function usePatientLogic() {
     isLoading,
     isError,
     error,
-  } = useQuery("users", getAllPatients);
+  } = useQuery("users", getAllPatients(localStorage.getItem("access_token")));
 
   return {
     isLoading,

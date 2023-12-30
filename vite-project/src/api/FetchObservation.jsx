@@ -1,10 +1,13 @@
 import axios from "axios";
 
-export async function getAllObservationsForPatient(id) {
+export async function getAllObservationsForPatient(id, access_token) {
   try {
     const options = {
       method: "GET",
       url: `https://eoc-service.app.cloud.cbh.kth.se/observation/getAll/${id}`,
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
     };
 
     const response = await axios.request(options);
@@ -20,7 +23,7 @@ export async function getAllObservationsForPatient(id) {
   }
 }
 
-export function addOneObservation(observation, patientId, staffOrDoctorId) {
+export function addOneObservation(observation, patientId, staffOrDoctorId, access_token) {
   const queryParams = new URLSearchParams({
     observation: observation,
     patientId: patientId.toString(),
@@ -31,6 +34,9 @@ export function addOneObservation(observation, patientId, staffOrDoctorId) {
     `https://eoc-service.app.cloud.cbh.kth.se/observation/add?${queryParams.toString()}`,
     {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
     }
   )
     .then((response) => {
