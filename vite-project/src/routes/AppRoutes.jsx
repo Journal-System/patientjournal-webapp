@@ -11,6 +11,7 @@ import { ObservationList } from "../pages/Observation/ObservationList";
 import { ObservationForm } from "../pages/Observation/ObservationForm";
 import { Search } from "../pages/Search/SearchView";
 import { Images } from "../pages/Images/ImageView";
+import { Healthz } from "../pages/Healthz/Healthz";
 
 export default function AppRoutes() {
   return (
@@ -147,6 +148,21 @@ export default function AppRoutes() {
             </>
           }
         />
+
+        <Route
+          path="/Healthz"
+          element={
+            <>
+              <Helmet>
+                <title>Healthz &bull; Patient Journal</title>
+              </Helmet>
+              <Healthz />
+            </>
+          }
+        />
+
+        {/* Finally you will be redirected to a not found page */}
+        <Redirect to="/not-found" />
       </Routes>
     </HelmetProvider>
   );
