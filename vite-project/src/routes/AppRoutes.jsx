@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Patients } from "../pages/PatientCatalog/PatientCatalogView";
 import { Home } from "../pages/Home/HomeView";
@@ -12,6 +12,7 @@ import { ObservationForm } from "../pages/Observation/ObservationForm";
 import { Search } from "../pages/Search/SearchView";
 import { Images } from "../pages/Images/ImageView";
 import { Healthz } from "../pages/Healthz/Healthz";
+import { NotFound } from "../pages/NotFound/NotFound";
 
 export default function AppRoutes() {
   return (
@@ -154,15 +155,29 @@ export default function AppRoutes() {
           element={
             <>
               <Helmet>
-                <title>Healthz &bull; Patient Journal</title>
+                <title>Health Check &bull; Patient Journal</title>
               </Helmet>
               <Healthz />
             </>
           }
         />
 
-        {/* Finally you will be redirected to a not found page */}
-        <Redirect to="/not-found" />
+        <Route
+          path="*"
+          element={<Navigate to="/not-found" replace />}
+        />
+        
+        <Route
+          path="/not-found"
+          element={
+            <>
+              <Helmet>
+                <title>Not Found &bull; Patient Journal</title>
+              </Helmet>
+              <NotFound />
+            </>
+          }
+        />
       </Routes>
     </HelmetProvider>
   );

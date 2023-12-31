@@ -1,9 +1,10 @@
 import React from 'react';
+import { HealthzContainer } from './HealthzStyles';
 
 export function Healthz() {
   return (
-    <div>
-        <h3>Hey There!!! The App is Healthy</h3>     
-    </div>
+    <HealthzContainer>
+      <h1>Hey There!!! The App is Healthy</h1>
+    </HealthzContainer>
   );
 }
