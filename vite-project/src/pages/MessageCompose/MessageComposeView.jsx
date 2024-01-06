@@ -61,7 +61,7 @@ export function Messages() {
       content: newMessage,
     };
 
-    addMessage(newMessageObject. localStorage.getItem("access_token"));
+    addMessage(newMessageObject, localStorage.getItem("access_token"));
 
     setAllMessages([...allMessages, newMessageObject]);
     setNewMessage("");
