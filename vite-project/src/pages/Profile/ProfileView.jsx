@@ -49,26 +49,13 @@ export function Profile() {
         <div>Error: {patientError.message}</div>
       ) : null}
 
-      {isConditionError && conditionError ? (
-        <div>Error: {conditionError.message}</div>
-      ) : null}
-
-      {isEncounterError && encounterError ? (
-        <div>Error: {encounterError.message}</div>
-      ) : null}
-
-      {isObservationError && observationError ? (
-        <div>Error: {observationError.message}</div>
-      ) : null}
-
       {!isPatientLoading && !isConditionLoading && !isEncounterLoading && !isObservationLoading && (
         <>
           <Typography variant="h4">Name: {patientData.fullname}</Typography>
           <Typography variant="body1">Phone: {patientData.phone}</Typography>
           <Typography variant="body1">Email: {patientData.email}</Typography>
           <Typography variant="body1">Address: {patientData.address}</Typography>
-          <Typography variant="body1">Type: {patientData.userRole}</Typography>
-
+          
           <div
             style={{
               display: "flex",
