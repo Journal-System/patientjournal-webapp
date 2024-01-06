@@ -87,7 +87,7 @@ export function Profile() {
 
           <div style={{ display: "flex", paddingTop: "40px" }}>
             <ProfileWrapper>
-              {conditionData.length > 0 ? (
+              {conditionData?.length > 0 ? (
                 conditionData.map((condition, index) => (
                   <div
                     key={index}
@@ -115,7 +115,7 @@ export function Profile() {
             </ProfileWrapper>
 
             <ProfileWrapper>
-              {encounterData.length > 0 ? (
+              {encounterData?.length > 0 ? (
                 encounterData.map((encounter, index) => (
                   <div
                     key={index}
@@ -151,7 +151,7 @@ export function Profile() {
             </ProfileWrapper>
 
             <ProfileWrapper>
-              {observationData.length > 0 ? (
+              {observationData?.length > 0 ? (
                 observationData.map((observation, index) => (
                   <div
                     key={index}
