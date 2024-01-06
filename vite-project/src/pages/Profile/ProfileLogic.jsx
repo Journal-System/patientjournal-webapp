@@ -10,7 +10,7 @@ export function useProfileLogic(patientId) {
     isLoading: isPatientLoading,
     isError: isPatientError,
     error: patientError,
-  } = useQuery(["patient", patientId], () => getOnePatient(patientId));
+  } = useQuery(["patient", patientId], () => getOnePatient(patientId, localStorage.getItem("access_token")));
 
   const {
     data: conditionData,

@@ -151,18 +151,6 @@ export default function AppRoutes() {
         />
 
         <Route
-          path="/Healthz"
-          element={
-            <>
-              <Helmet>
-                <title>Health Check &bull; Patient Journal</title>
-              </Helmet>
-              <Healthz />
-            </>
-          }
-        />
-
-        <Route
           path="*"
           element={<Navigate to="/not-found" replace />}
         />

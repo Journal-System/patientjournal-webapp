@@ -23,12 +23,15 @@ export async function getAllPatients(access_token) {
   }
 }
 
-export async function getOnePatient(id) {
+export async function getOnePatient(id, access_token) {
   console.log("This id: " + id);
   try {
     const options = {
       method: "GET",
       url: `https://user-service.app.cloud.cbh.kth.se/patient/get/${id}`,
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
     };
 
     const response = await axios.request(options);
