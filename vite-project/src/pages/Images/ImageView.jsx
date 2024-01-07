@@ -63,7 +63,7 @@ export function Images() {
   const handleFetchImage = async () => {
     setIsImageLoading(true)
     try {
-      const dataUrl = await getImageById(imageId);
+      const dataUrl = await getImageById(imageId, localStorage.getItem("access_token"));
       setImageData(dataUrl);
       handleDialogClose(); // Close the dialog after fetching the image
     } catch (error) {
