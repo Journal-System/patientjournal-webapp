@@ -5,7 +5,10 @@ export async function getImageById(id) {
     const options = {
       method: "GET",
       url: `https://image-servie.app.cloud.cbh.kth.se/download/${id}`,
-      responseType: "arraybuffer", // Set response type to arraybuffer, image is stored as BLOB thats why
+      responseType: "arraybuffer", // Set response type to arraybuffer, image is stored as BLOB thats why,
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
     };
 
     const response = await axios.request(options);
@@ -43,6 +46,7 @@ export async function uploadImage(imageFile) {
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${access_token}`,
         },
       }
     );
@@ -69,6 +73,7 @@ export async function saveImagewithId(id, imageFile) {
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${access_token}`,
         },
       }
     );
