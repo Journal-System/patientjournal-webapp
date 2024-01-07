@@ -6,6 +6,7 @@ export async function getImageById(id, access_token) {
       method: "GET",
       url: `https://image-servie.app.cloud.cbh.kth.se/download/${id}`,
       responseType: "arraybuffer", // Set response type to arraybuffer, image is stored as BLOB thats why,
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${access_token}`,
       },
