@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getImageById(id) {
+export async function getImageById(id, access_token) {
   try {
     const options = {
       method: "GET",
@@ -35,7 +35,7 @@ export async function getImageById(id) {
   }
 }
 
-export async function uploadImage(imageFile) {
+export async function uploadImage(imageFile, access_token) {
   try {
     const formData = new FormData();
     formData.append("image", imageFile);
@@ -62,7 +62,7 @@ export async function uploadImage(imageFile) {
   }
 }
 
-export async function saveImagewithId(id, imageFile) {
+export async function saveImagewithId(id, imageFile, access_token) {
   try {
     const formData = new FormData();
     formData.append("image", imageFile);
