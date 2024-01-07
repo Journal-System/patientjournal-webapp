@@ -82,7 +82,7 @@ export function Images() {
     setIsImageLoading(true);
     try {
       if (selectedFile) {
-        await uploadImage(selectedFile);
+        await uploadImage(selectedFile, localStorage.getItem("access_token"));
         console.log("Image uploaded successfully!");
         setSelectedFile(null);
         handleDialogClose();
@@ -110,7 +110,7 @@ export function Images() {
 
     try {
       // Use the saveImageWithId function to save the canvas image to the database
-      await saveImagewithId(imageId, file);
+      await saveImagewithId(imageId, file, localStorage.getItem("access_token"));
       console.log("Canvas image saved successfully");
     } catch (error) {
       console.error("Error saving canvas image:", error.message);
